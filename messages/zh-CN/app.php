@@ -1,0 +1,36 @@
+<?php
+return array(
+    'Export' => '导出',
+    'Create' => '新增',
+    'Update' => '更新',
+    'Delete' => '删除',
+    'Sh'=>'商会',
+    'Shes'=>'商会',
+    'Create Sh'=>'新增商会',
+    'Update {modelClass}: '=>'更新{modelClass}: ',
+    'Shhies'=>'商会会员列表',
+    'Create Shhy'=>'新增商会会员',
+    'Shhy'=>'商会会员',
+    'Are you sure you want to delete this item?' => '您确定删除',
+    'Shdy' => '商会党员',
+    'Shdies' => '商会党员列表',
+    'Create Shdy' => '新增商会党员',
+    'Dwrs' => '党外人士',
+    'Create Dwrs' => '新增党外人士',
+    'Xjcrs' => '新阶层人士',
+    'Create Xjcrs' => '新增新阶层人士',
+	'Create Zjcs' => '新增宗教场所',
+    'Zjcs' => '宗教场所',
+
+    'Create Jzry' => '新增教职人员',
+    'Jzries' => '教职人员',
+    'Jzry' => '教职人员',
+
+    'Create Nyrbt' => '新增牛羊肉补贴',
+    'Nyrbts' => '牛羊肉补贴',
+    'Nyrbt' => '牛羊肉补贴',
+
+    'Create Ssmz' => '新增少数民族',
+    'Ssmzs' => '少数民族',
+    'Ssmz' => '少数民族',
+);
