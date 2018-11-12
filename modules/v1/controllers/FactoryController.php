@@ -21,15 +21,15 @@ class FactoryController extends Controller
      * @apiGroup factory
      * @apiName /v1/factory/list
      * @apiVersion 3.1.0
-     * @apiHeader {String} ecg_token
-     * @apiHeader {String} ecg_lang
+     * @apiHeader {String} app_token
+     * @apiHeader {String} app_lang
      * @apiHeader {String} app_type
      * @apiHeader {String} app_version
      * @apiSampleRequest /v1/factory/list
      * @apiHeaderExample {string} Header-Example:
      *     {
-     *       "ecg_token": "wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3",
-     *       "ecg_lang": "zh",
+     *       "app_token": "wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3",
+     *       "app_lang": "zh",
      *       "app_type": "smt_client",
      *       "app_version": "2.4.7",
      *     }

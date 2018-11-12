@@ -14,14 +14,14 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_token",
+            "field": "app_token",
             "description": ""
           },
           {
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_lang",
+            "field": "app_lang",
             "description": ""
           },
           {
@@ -43,7 +43,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"ecg_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"ecg_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
+          "content": "{\n  \"app_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"app_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
           "type": "string"
         }
       ]
@@ -174,14 +174,14 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_token",
+            "field": "app_token",
             "description": ""
           },
           {
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_lang",
+            "field": "app_lang",
             "description": ""
           },
           {
@@ -203,7 +203,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"ecg_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"ecg_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
+          "content": "{\n  \"app_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"app_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
           "type": "string"
         }
       ]
@@ -361,14 +361,14 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_token",
+            "field": "app_token",
             "description": ""
           },
           {
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_lang",
+            "field": "app_lang",
             "description": ""
           },
           {
@@ -390,7 +390,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"ecg_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"ecg_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
+          "content": "{\n  \"app_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"app_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
           "type": "string"
         }
       ]
@@ -528,14 +528,14 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_token",
+            "field": "app_token",
             "description": ""
           },
           {
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_lang",
+            "field": "app_lang",
             "description": ""
           },
           {
@@ -557,7 +557,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"ecg_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"ecg_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
+          "content": "{\n  \"app_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"app_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
           "type": "string"
         }
       ]
@@ -674,14 +674,14 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_token",
+            "field": "app_token",
             "description": ""
           },
           {
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_lang",
+            "field": "app_lang",
             "description": ""
           },
           {
@@ -703,7 +703,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"ecg_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"ecg_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
+          "content": "{\n  \"app_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"app_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
           "type": "string"
         }
       ]
@@ -854,14 +854,14 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_token",
+            "field": "app_token",
             "description": ""
           },
           {
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "ecg_lang",
+            "field": "app_lang",
             "description": ""
           },
           {
@@ -883,7 +883,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"ecg_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"ecg_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
+          "content": "{\n  \"app_token\": \"wVNq2Fcg-zXVcKDYRy_vLq7niv-36As3\",\n  \"app_lang\": \"zh\",\n  \"app_type\": \"smt_client\",\n  \"app_version\": \"2.4.7\",\n}",
           "type": "string"
         }
       ]
