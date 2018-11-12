@@ -22,14 +22,44 @@ class LoginService
      */
     static function getAllTokenInfo($token)
     {
-        try {
-            $redis = Yii::$app->redis;
-            $redis->select(2);
-            $id = $redis->get($token);
-            return $id;
-        } catch (Exception $e) {
-            Yii::error($e->getMessage(), 'yii\error\getAllTokenInfo');
-            return null;
+        $redis = Yii::$app->redis;
+        $redis->select(2);
+        $id = $redis->get($token);
+        return $id;
+    }
+
+    /**
+     * 获取token值
+     * @return array|string
+     */
+    public static function getAppToken()
+    {
+        return Yii::$app->request->getHeaders()->get('app_token');
+    }
+
+    /**
+     * 获取token信息
+     * @param $id
+     * @return array|string
+     */
+    static function setToken($id)
+    {
+        $newToken = Yii::$app->security->generateRandomString(32);
+        $oldToken = self::getAppToken();
+        if (empty($oldToken) == false) {
+            $id = self::getAllTokenInfo($oldToken);
+            if (empty($id) == false) {
+                $newToken = $oldToken;
+            }
         }
+        $redis = Yii::$app->redis;
+        $redis->select(2);
+        $redis->set($newToken, $id);
+        return $newToken;
+    }
+
+    static function hasPower($request, $identity)
+    {
+        return true;
     }
 }

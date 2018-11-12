@@ -9,6 +9,7 @@
 namespace app\models;
 
 
+use app\services\LoginService;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
