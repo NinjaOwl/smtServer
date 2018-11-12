@@ -292,3 +292,18 @@ CREATE TABLE `attachment` (
   `createUser` varchar(50) DEFAULT NULL COMMENT '创建者',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='附件表';
+
+
+DROP TABLE IF EXISTS `checkversion`;
+CREATE TABLE `checkversion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_id` varchar(5) NOT NULL COMMENT '各产品APP_ID',
+  `app_name` varchar(20) NOT NULL COMMENT '各产品APP_名称',
+  `client_version` varchar(20) NOT NULL COMMENT '客户端版本号',
+  `download_url` varchar(100) NOT NULL COMMENT '升级下载网址',
+  `update_id` tinyint(1) NOT NULL DEFAULT '0' COMMENT '版本状态  1:最新版本，0：之前老版本',
+  `update_log` varchar(500) DEFAULT '' COMMENT '升级日志',
+  `update_install` int(11) NOT NULL DEFAULT '0' COMMENT '是否强制安装',
+  `release_time` int(11) NOT NULL DEFAULT '0' COMMENT '发布时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='app升级表';

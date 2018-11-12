@@ -12,7 +12,8 @@ class Module extends \yii\base\Module
 {
     public function init()
     {
-    	Yii::$app->errorHandler->errorAction='wx/error/notfound';
+    	Yii::$app->errorHandler->errorAction='v1/error/notfound';
+        Yii::$app->user->identityClass='app\models\AllUser';
         parent::init();
     }
 }
