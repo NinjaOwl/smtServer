@@ -948,7 +948,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "int",
             "optional": false,
-            "field": "data.res_id",
+            "field": "data.list.res_id",
             "description": "<p>资源编号</p>"
           },
           {

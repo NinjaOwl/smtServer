@@ -39,7 +39,7 @@ class ResController extends Controller
      * @apiSuccess {String} msg 消息
      * @apiSuccess {json} data 数据
      * @apiSuccess {json[]} data.list
-     * @apiSuccess {int} data.res_id 资源编号
+     * @apiSuccess {int} data.list.res_id 资源编号
      * @apiSuccess {string} data.list.res_name 资源名称
      * @apiSuccess {string} data.list.res_desc 资源描述
      * @apiSuccess {string} data.list.res_suffix 文件后缀
