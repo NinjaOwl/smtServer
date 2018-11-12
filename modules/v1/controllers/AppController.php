@@ -19,6 +19,7 @@ class AppController extends Controller
      * @api {post}  /v1/app/get  获取最新版本信息
      * @apiDescription 获取最新版本信息
      * @apiName /v1/app/get
+     * @apiGroup app
      * @apiVersion 3.1.0
      * @apiHeader {String} ecg_token
      * @apiHeader {String} ecg_lang

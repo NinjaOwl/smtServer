@@ -19,7 +19,7 @@ class AuthController extends Controller
      * @api {post}  /v1/auth/login  登录
      * @apiDescription 登录
      * @apiName /v1/auth/login
-     * @apiGroup user
+     * @apiGroup auth
      * @apiParam {String} user_name 手机号
      * @apiParam {String} password 密码
      * @apiVersion 3.1.0
@@ -79,6 +79,7 @@ class AuthController extends Controller
      * @api {post}  /v1/auth/get  获取登录信息
      * @apiDescription 获取登录信息
      * @apiName /auth/auth/get
+     * @apiGroup auth
      * @apiVersion 3.1.0
      * @apiHeader {String} ecg_token
      * @apiHeader {String} ecg_lang

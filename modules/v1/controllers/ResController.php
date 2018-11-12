@@ -19,6 +19,7 @@ class ResController extends Controller
      * @api {post}  /v1/res/list  获取资源列表
      * @apiDescription 获取资源列表
      * @apiName /v1/res/list
+     * @apiGroup res
      * @apiVersion 3.1.0
      * @apiHeader {String} ecg_token
      * @apiHeader {String} ecg_lang
@@ -82,6 +83,7 @@ class ResController extends Controller
      * @api {post}  /v1/res/get  获取资源详情
      * @apiDescription 获取资源详情
      * @apiName /v1/res/get
+     *  @apiGroup res
      * @apiVersion 3.1.0
      * @apiHeader {String} ecg_token
      * @apiHeader {String} ecg_lang

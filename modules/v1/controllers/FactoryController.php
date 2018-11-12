@@ -18,6 +18,7 @@ class FactoryController extends Controller
      *
      * @api {post}  /v1/factory/list  获取工厂地址
      * @apiDescription 获取工厂地址
+     * @apiGroup factory
      * @apiName /v1/factory/list
      * @apiVersion 3.1.0
      * @apiHeader {String} ecg_token
