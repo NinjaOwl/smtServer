@@ -9,7 +9,6 @@
 namespace app\services;
 
 
-use Exception;
 use Yii;
 
 class LoginService

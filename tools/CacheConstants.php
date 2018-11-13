@@ -15,4 +15,8 @@ class CacheConstants
     {
         return 'Faq_' . $faq_id;
     }
+
+    public static function getTokenCache($id){
+        return 'Token_' . $id;
+    }
 }

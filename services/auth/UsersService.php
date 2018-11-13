@@ -9,6 +9,8 @@
 namespace app\services\auth;
 
 
+use mdm\admin\models\User;
+
 class UsersService
 {
     /**
@@ -18,6 +20,7 @@ class UsersService
      */
     public function login($userName, $password)
     {
+        $info = User::findByUsername($userName);
         
     }
 }
