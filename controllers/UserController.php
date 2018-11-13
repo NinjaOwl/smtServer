@@ -2,9 +2,9 @@
 
 namespace app\controllers;
 
-use app\modules\v1\models\SignupForm;
-use app\modules\v1\models\User;
-use app\modules\v1\models\UserSearch;
+use app\models\SignupForm;
+use app\models\User;
+use app\models\UserSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

@@ -2,8 +2,8 @@
 
 namespace app\models;
 
-use app\modules\v1\models\AdminAuth;
-use app\modules\v1\models\User;
+
+use app\models\User;
 use Yii;
 use yii\base\Model;
 
