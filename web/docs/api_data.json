@@ -285,13 +285,20 @@
             "optional": false,
             "field": "data.user.factory_id",
             "description": "<p>厂编号</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "data.user_token",
+            "description": "<p>用户登录令牌</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "正确实例:",
-          "content": "\n{\n\"code\": 200,\n\"data\": {\n\"user\":{\n  \"username\":\"\",\n  \"name\":\"\",\n  \"sex\":1\n  \"factory_id\":1,\n  \"factory_name\":\"\",\n}\n},\n\"msg\": \"请求成功\"\n}",
+          "content": "\n{\n\"code\": 200,\n\"data\": {\n\"user\":{\n  \"username\":\"\",\n  \"name\":\"\",\n  \"sex\":1\n  \"factory_id\":1,\n  \"factory_name\":\"\",\n},\n'user_token':''\n},\n\"msg\": \"请求成功\"\n}",
           "type": "json"
         }
       ]
@@ -340,7 +347,7 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "user_name",
+            "field": "username",
             "description": "<p>手机号</p>"
           },
           {
@@ -472,13 +479,20 @@
             "optional": false,
             "field": "data.user.factory_id",
             "description": "<p>厂编号</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "data.user_token",
+            "description": "<p>用户登录令牌</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "正确实例:",
-          "content": "{\n\"code\": 200,\n\"data\": {\n\"user\":{\n  \"username\":\"\",\n  \"name\":\"\",\n  \"sex\":1\n  \"factory_id\":1,\n  \"factory_name\":\"\",\n}\n},\n\"msg\": \"请求成功\"\n}",
+          "content": "{\n\"code\": 200,\n\"data\": {\n\"user\":{\n  \"username\":\"\",\n  \"name\":\"\",\n  \"sex\":1\n  \"factory_id\":1,\n  \"factory_name\":\"\",\n},\n 'user_token':''\n},\n\"msg\": \"请求成功\"\n}",
           "type": "json"
         }
       ]
