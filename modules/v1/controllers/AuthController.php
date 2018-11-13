@@ -7,12 +7,23 @@
  */
 namespace app\modules\v1\controllers;
 
+use app\services\auth\UsersService;
+use app\tools\OutTools;
+use yii\filters\auth\UserAuth;
 use yii\web\Controller;
 
 
 class AuthController extends Controller
 {
-    public $enableCsrfValidation = false;
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => UserAuth::className(),
+            'except' => ['login'],
+        ];
+        return $behaviors;
+    }
 
     /**
      *
@@ -20,7 +31,7 @@ class AuthController extends Controller
      * @apiDescription 登录
      * @apiName /v1/auth/login
      * @apiGroup auth
-     * @apiParam {String} user_name 手机号
+     * @apiParam {String} username 手机号
      * @apiParam {String} password 密码
      * @apiVersion 3.1.0
      * @apiHeader {String} app_token
@@ -45,6 +56,7 @@ class AuthController extends Controller
      * @apiSuccess {string} data.user.sex 性别 1女 2 男 0 未知
      * @apiSuccess {string} data.user.factory_name 厂编号
      * @apiSuccess {string} data.user.factory_id 厂编号
+     *     * @apiSuccess {string} data.user_token 用户登录令牌
      * @apiSuccessExample {json} 正确实例:
      *{
      * "code": 200,
@@ -55,7 +67,8 @@ class AuthController extends Controller
      *   "sex":1
      *   "factory_id":1,
      *   "factory_name":"",
-     * }
+     * },
+     *  'user_token':''
      * },
      * "msg": "请求成功"
      * }
@@ -71,7 +84,11 @@ class AuthController extends Controller
      */
     public function actionLogin()
     {
-
+        $username = \Yii::$app->request->post('username');
+        $password = \Yii::$app->request->post('password');
+        $userService = new UsersService();
+        $res = $userService->login($username, $password);
+        OutTools::outJsonP($res);
     }
 
     /**
@@ -103,6 +120,7 @@ class AuthController extends Controller
      * @apiSuccess {string} data.user.sex 性别 1女 2 男 0 未知
      * @apiSuccess {string} data.user.factory_name 厂编号
      * @apiSuccess {string} data.user.factory_id 厂编号
+     * @apiSuccess {string} data.user_token 用户登录令牌
      * @apiSuccessExample {json} 正确实例:
      *
      * {
@@ -114,7 +132,8 @@ class AuthController extends Controller
      *   "sex":1
      *   "factory_id":1,
      *   "factory_name":"",
-     * }
+     * },
+     * 'user_token':''
      * },
      * "msg": "请求成功"
      * }
@@ -131,6 +150,9 @@ class AuthController extends Controller
      */
     public function actionGet()
     {
-
+        $user = \Yii::$app->getUser();
+        $userService = new UsersService();
+        $res = $userService->get($user->getId());
+        OutTools::outJsonP($res);
     }
 }

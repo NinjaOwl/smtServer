@@ -6,14 +6,23 @@
  * Time: 13:38
  */
 namespace app\modules\v1\controllers;
-
+use app\services\auth\FactoryService;
+use app\tools\OutTools;
+use yii\filters\auth\UserAuth;
 use yii\web\Controller;
 
 
 class FactoryController extends Controller
 {
-    public $enableCsrfValidation = false;
-
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => UserAuth::className(),
+            'except' => [],
+        ];
+        return $behaviors;
+    }
     /**
      *
      * @api {post}  /v1/factory/list  获取工厂地址
@@ -66,6 +75,8 @@ class FactoryController extends Controller
      */
     public function actionList()
     {
-
+        $factoryService = new FactoryService();
+        $res = $factoryService->getList();
+        OutTools::outJsonP($res);
     }
 }

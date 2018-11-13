@@ -15,4 +15,5 @@ class ErrorCode
     const ERROR = 0;
     const TOKEN_EXPIRE = -1; //过期
     const NO_POWER = -2; //没有权限
+    const NOT_FOUND_EXCEPTION = 404; //找不到
 }

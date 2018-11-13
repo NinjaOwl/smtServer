@@ -7,12 +7,23 @@
  */
 namespace app\modules\v1\controllers;
 
+use app\services\auth\ResService;
+use app\tools\OutTools;
+use yii\filters\auth\UserAuth;
 use yii\web\Controller;
 
 
 class ResController extends Controller
 {
-    public $enableCsrfValidation = false;
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => UserAuth::className(),
+            'except' => [],
+        ];
+        return $behaviors;
+    }
 
     /**
      *
@@ -73,9 +84,15 @@ class ResController extends Controller
      * "data": []
      * }
      */
-    public function actionGetList()
+    public function actionList()
     {
-
+        $resService = new ResService();
+        $factoryId = \Yii::$app->request->post('factory_id');
+        $resName = \Yii::$app->request->post('res_name');
+        $max = \Yii::$app->request->post('max', 10);
+        $page = \Yii::$app->request->post('page', 1);
+        $res = $resService->getList($factoryId, $resName, $max, $page);
+        OutTools::outJsonP($res);
     }
 
     /**
@@ -83,7 +100,7 @@ class ResController extends Controller
      * @api {post}  /v1/res/get  获取资源详情
      * @apiDescription 获取资源详情
      * @apiName /v1/res/get
-     *  @apiGroup res
+     * @apiGroup res
      * @apiVersion 3.1.0
      * @apiHeader {String} app_token
      * @apiHeader {String} app_lang
@@ -138,6 +155,9 @@ class ResController extends Controller
      */
     public function actionGet()
     {
-
+        $resService = new ResService();
+        $resId = \Yii::$app->request->post('res_id');
+        $res = $resService->get($resId);
+        OutTools::outJsonP($res);
     }
 }

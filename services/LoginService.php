@@ -13,6 +13,7 @@ use Yii;
 
 class LoginService
 {
+    
     /**
      *
      * 获取token里的所有信息

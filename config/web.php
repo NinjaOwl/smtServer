@@ -18,6 +18,16 @@ $config = [
     'timeZone' => 'Asia/Chongqing',
     'name'=>'横溪街道数据管理系统',
     'modules' => [
+        'v1' => [
+            'basePath' => '@app/modules/v1',
+            'class' => 'app\modules\v1\Module',
+            'components' => [
+                'errorHandler' => [
+                    'errorAction' => 'v1/error/show',
+                    'class' => 'yii\web\ErrorHandler',
+                ]
+            ]
+        ],
         "admin" => [
             "class" => 'mdm\admin\Module',
         ],
@@ -28,7 +38,8 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'andy_invest',
+            'cookieValidationKey' => '88CXJg3vfe8XPrZAUQer_auVRMqAM9OQ',
+            "enableCsrfValidation" => false,
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ],
@@ -103,19 +114,17 @@ $config = [
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'enableStrictParsing' => false,
             'showScriptName' => false,
             'rules' => [
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'v1/news',
-                    'extraPatterns' => [
-                        'GET search' => 'search',
-                    ],
-                    'except' => ['update', 'delete', 'view']
-                ],
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
-
+        ],
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => '127.0.0.1',
+            'port' => 6379,
+            'database' => 6,
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',

@@ -108,6 +108,9 @@ class OutTools
      */
     public static function success($data, $msg = '', $logCatalog = '', $logMethod = '', $isReturn = true)
     {
+        if (empty($msg)) {
+            $msg = Yii::t('app', 'Success');
+        }
         return self::out(ErrorCode::SUCCESS, $msg, $data, $logCatalog, $logMethod, $isReturn);
     }
 

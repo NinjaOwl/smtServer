@@ -14,6 +14,8 @@ use mdm\admin\components\Configs;
  *
  * @property integer $id
  * @property string $username
+ * @property int $sex
+ * @property int $factory_id
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
