@@ -11,7 +11,7 @@ namespace app\format;
 
 use app\models\Factory;
 
-class formatUser
+class FormatUser
 {
     public static function format($data)
     {

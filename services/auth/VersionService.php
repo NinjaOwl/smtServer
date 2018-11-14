@@ -10,6 +10,8 @@ namespace app\services\auth;
 
 
 use app\format\FormatUser;
+use app\format\FormatVersion;
+use app\models\Version;
 use app\services\LoginService;
 use app\tools\ErrorCode;
 use app\tools\OutTools;
@@ -22,6 +24,11 @@ class VersionService
      */
     public function get()
     {
-
+        $info = Version::find()->where("is_latest=1")->asArray()->one();
+        if (empty($info) == false) {
+            return OutTools::success(array('version' => FormatVersion::format($info)));
+        } else {
+            return OutTools::success((object)[]);
+        }
     }
 }

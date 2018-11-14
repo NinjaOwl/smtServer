@@ -7,12 +7,23 @@
  */
 namespace app\modules\v1\controllers;
 
+use app\services\auth\VersionService;
+use app\tools\OutTools;
+use yii\filters\auth\UserAuth;
 use yii\web\Controller;
 
 
 class AppController extends Controller
 {
-    public $enableCsrfValidation = false;
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => UserAuth::className(),
+            'except' => ['get'],
+        ];
+        return $behaviors;
+    }
 
     /**
      *
@@ -41,6 +52,7 @@ class AppController extends Controller
      * @apiSuccess {string} data.version.version_code 版本号
      * @apiSuccess {string} data.version.version_content 版本内容
      * @apiSuccess {string} data.version.version_url 版本地址
+     * @apiSuccess {string} data.version.file_size 文件大小
      * @apiSuccess {string} data.version.is_force 是否强制
      * @apiSuccessExample {json} 正确实例:
      *
@@ -70,8 +82,10 @@ class AppController extends Controller
      */
     public function actionGet()
     {
-
+        $versionService = new VersionService();
+        $res = $versionService->get();
+        OutTools::outJsonP($res);
     }
 
-    
+
 }
