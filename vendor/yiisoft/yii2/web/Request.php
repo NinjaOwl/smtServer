@@ -208,8 +208,7 @@ class Request extends \yii\base\Request
                     if (strncmp($name, 'HTTP_', 5) === 0) {
                         $name = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
                         $this->_headers->add($name, $value);
-                    } elseif (strncmp($name, 'REDIRECT_', 9) === 0) {
-                        $name = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 9)))));
+                    } else {
                         $this->_headers->add($name, $value);
                     }
                 }
