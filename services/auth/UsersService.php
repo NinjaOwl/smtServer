@@ -9,7 +9,7 @@
 namespace app\services\auth;
 
 
-use app\Format\FormatUser;
+use app\format\FormatUser;
 use app\services\LoginService;
 use app\tools\ErrorCode;
 use app\tools\OutTools;
