@@ -208,6 +208,9 @@ class Request extends \yii\base\Request
                     if (strncmp($name, 'HTTP_', 5) === 0) {
                         $name = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
                         $this->_headers->add($name, $value);
+                    } elseif (strncmp($name, 'REDIRECT_', 9) === 0) {
+                        $name = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 9)))));
+                        $this->_headers->add($name, $value);
                     }
                 }
 
@@ -231,15 +234,15 @@ class Request extends \yii\base\Request
         if (isset($_POST[$this->methodParam])) {
             return strtoupper($_POST[$this->methodParam]);
         }
-        
+
         if (isset($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'])) {
             return strtoupper($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE']);
         }
-        
+
         if (isset($_SERVER['REQUEST_METHOD'])) {
             return strtoupper($_SERVER['REQUEST_METHOD']);
         }
-        
+
         return 'GET';
     }
 
@@ -335,7 +338,7 @@ class Request extends \yii\base\Request
     public function getIsFlash()
     {
         return isset($_SERVER['HTTP_USER_AGENT']) &&
-            (stripos($_SERVER['HTTP_USER_AGENT'], 'Shockwave') !== false || stripos($_SERVER['HTTP_USER_AGENT'], 'Flash') !== false);
+        (stripos($_SERVER['HTTP_USER_AGENT'], 'Shockwave') !== false || stripos($_SERVER['HTTP_USER_AGENT'], 'Flash') !== false);
     }
 
     private $_rawBody;
@@ -740,7 +743,7 @@ class Request extends \yii\base\Request
             $pathInfo = substr($pathInfo, 1);
         }
 
-        return (string) $pathInfo;
+        return (string)$pathInfo;
     }
 
     /**
@@ -827,7 +830,7 @@ class Request extends \yii\base\Request
     public function getIsSecureConnection()
     {
         return isset($_SERVER['HTTPS']) && (strcasecmp($_SERVER['HTTPS'], 'on') === 0 || $_SERVER['HTTPS'] == 1)
-            || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strcasecmp($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0;
+        || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strcasecmp($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0;
     }
 
     /**
@@ -845,7 +848,7 @@ class Request extends \yii\base\Request
      */
     public function getServerPort()
     {
-        return isset($_SERVER['SERVER_PORT']) ? (int) $_SERVER['SERVER_PORT'] : null;
+        return isset($_SERVER['SERVER_PORT']) ? (int)$_SERVER['SERVER_PORT'] : null;
     }
 
     /**
@@ -912,7 +915,7 @@ class Request extends \yii\base\Request
     public function getPort()
     {
         if ($this->_port === null) {
-            $this->_port = !$this->getIsSecureConnection() && isset($_SERVER['SERVER_PORT']) ? (int) $_SERVER['SERVER_PORT'] : 80;
+            $this->_port = !$this->getIsSecureConnection() && isset($_SERVER['SERVER_PORT']) ? (int)$_SERVER['SERVER_PORT'] : 80;
         }
 
         return $this->_port;
@@ -927,7 +930,7 @@ class Request extends \yii\base\Request
     public function setPort($value)
     {
         if ($value != $this->_port) {
-            $this->_port = (int) $value;
+            $this->_port = (int)$value;
             $this->_hostInfo = null;
         }
     }
@@ -944,7 +947,7 @@ class Request extends \yii\base\Request
     public function getSecurePort()
     {
         if ($this->_securePort === null) {
-            $this->_securePort = $this->getIsSecureConnection() && isset($_SERVER['SERVER_PORT']) ? (int) $_SERVER['SERVER_PORT'] : 443;
+            $this->_securePort = $this->getIsSecureConnection() && isset($_SERVER['SERVER_PORT']) ? (int)$_SERVER['SERVER_PORT'] : 443;
         }
 
         return $this->_securePort;
@@ -959,7 +962,7 @@ class Request extends \yii\base\Request
     public function setSecurePort($value)
     {
         if ($value != $this->_securePort) {
-            $this->_securePort = (int) $value;
+            $this->_securePort = (int)$value;
             $this->_hostInfo = null;
         }
     }
@@ -1103,7 +1106,7 @@ class Request extends \yii\base\Request
                 if (strpos($param, '=') !== false) {
                     list ($key, $value) = explode('=', $param, 2);
                     if ($key === 'q') {
-                        $values['q'][2] = (double) $value;
+                        $values['q'][2] = (double)$value;
                     } else {
                         $values[$key] = $value;
                     }
@@ -1168,7 +1171,8 @@ class Request extends \yii\base\Request
 
                 if ($normalizedLanguage === $acceptableLanguage || // en-us==en-us
                     strpos($acceptableLanguage, $normalizedLanguage . '-') === 0 || // en==en-us
-                    strpos($normalizedLanguage, $acceptableLanguage . '-') === 0) { // en-us==en
+                    strpos($normalizedLanguage, $acceptableLanguage . '-') === 0
+                ) { // en-us==en
 
                     return $language;
                 }
@@ -1391,7 +1395,7 @@ class Request extends \yii\base\Request
             return $this->validateCsrfTokenInternal($token, $trueToken);
         } else {
             return $this->validateCsrfTokenInternal($this->getBodyParam($this->csrfParam), $trueToken)
-                || $this->validateCsrfTokenInternal($this->getCsrfTokenFromHeader(), $trueToken);
+            || $this->validateCsrfTokenInternal($this->getCsrfTokenFromHeader(), $trueToken);
         }
     }
 
