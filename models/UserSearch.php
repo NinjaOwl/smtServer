@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use app\models\User;
 
 /**
- * UserSearch represents the model behind the search form about `app\modules\v1\models\User`.
+ * UserSearch represents the model behind the search form about `app\models\User`.
  */
 class UserSearch extends User
 {
@@ -18,8 +18,8 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username','name', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
+            [['id', 'sex', 'status', 'created_at', 'updated_at', 'factory_id'], 'integer'],
+            [['name', 'username', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
         ];
     }
 
@@ -60,14 +60,15 @@ class UserSearch extends User
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'name'=>$this->name,
+            'sex' => $this->sex,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'factory_id' => $this->factory_id,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
             ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])

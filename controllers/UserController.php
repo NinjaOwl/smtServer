@@ -2,14 +2,12 @@
 
 namespace app\controllers;
 
-use app\models\SignupForm;
+use Yii;
 use app\models\User;
 use app\models\UserSearch;
-use Yii;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -26,17 +24,6 @@ class UserController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
-                ],
-            ],
-            'access' => [
-                'class' => AccessControl::className(),
-//                'only' => ['index'],
-                'rules' => [
-                    [
-//                        'actions' => ['index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
                 ],
             ],
         ];
@@ -96,20 +83,10 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if (empty($_POST) == false) {
-            if (empty($_POST['User']['password_hash']) == false) {
-                $model->setPassword($_POST['User']['password_hash']);
-                $_POST['User']['password_hash'] = $model->password_hash;
-            } else {
-                $_POST['User']['password_hash'] = $model->password_hash;
-            }
-            $model->updated_at = time();
-        }
-//        unset($_POST['User']['password_hash']);
-        if ($model->load($_POST) && $model->save()) {
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            $model->password_hash = '';
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -124,14 +101,9 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        if ($model->username != Yii::$app->params['adminUser']) {
-            $model->delete();
-            return $this->redirect(['index']);
-        } else {
-            Yii::$app->getSession()->setFlash('error', '超级管理员不能删除');
-            return $this->redirect(['view', 'id' => $id]);
-        }
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
     }
 
     /**
@@ -148,23 +120,5 @@ class UserController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    /**
-     *  create new user
-     */
-    public function actionSignup()
-    {
-        $model = new SignupForm();
-
-
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            return $this->redirect(['index']);
-        }
-
-        // 渲染添加新用户的表单
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
     }
 }

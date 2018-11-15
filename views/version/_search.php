@@ -23,7 +23,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'download_url') ?>
 
-    <?= $form->field($model, 'is_lateast') ?>
+    <?= $form->field($model, 'file_size') ?>
+
+    <?php // echo $form->field($model, 'is_latest') ?>
 
     <?php // echo $form->field($model, 'is_force') ?>
 

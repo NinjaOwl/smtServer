@@ -18,8 +18,8 @@ class VersionSearch extends Version
     public function rules()
     {
         return [
-            [['id', 'is_lateast', 'is_force', 'release_time'], 'integer'],
-            [['version_code', 'version_content', 'download_url'], 'safe'],
+            [['id', 'is_latest', 'is_force', 'release_time'], 'integer'],
+            [['version_code', 'version_content', 'download_url', 'file_size'], 'safe'],
         ];
     }
 
@@ -60,14 +60,15 @@ class VersionSearch extends Version
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'is_lateast' => $this->is_lateast,
+            'is_latest' => $this->is_latest,
             'is_force' => $this->is_force,
             'release_time' => $this->release_time,
         ]);
 
         $query->andFilterWhere(['like', 'version_code', $this->version_code])
             ->andFilterWhere(['like', 'version_content', $this->version_content])
-            ->andFilterWhere(['like', 'download_url', $this->download_url]);
+            ->andFilterWhere(['like', 'download_url', $this->download_url])
+            ->andFilterWhere(['like', 'file_size', $this->file_size]);
 
         return $dataProvider;
     }

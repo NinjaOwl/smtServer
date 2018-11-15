@@ -18,8 +18,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'download_url')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_lateast')->textInput() ?>
-
     <?= $form->field($model, 'is_force')->textInput() ?>
 
     <?= $form->field($model, 'release_time')->textInput() ?>
