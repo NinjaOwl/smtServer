@@ -35,23 +35,48 @@ class OutFormat
         if ($images == '') {
             $images = 'default.jpg';
         }
-        $basePath = Yii::$app->params['url_path'].$images;
+        $basePath = Yii::$app->getUrlManager()->getHostInfo() . Yii::$app->getUrlManager()->getBaseUrl() . Yii::$app->params['url_path'] . $images;
         return $basePath;
     }
 
-    /**
-     *
-     * @param $catalog
-     * @return mixed
-     */
-    public static function formatDyType($catalog)
+    public static function formatSize($b, $times = 0)
     {
-        if (isset($catalog) && $catalog !== '') {
-            $list = CommonFunc::getDyTypeList();
-            return $list[$catalog];
+        if ($b > 1024) {
+            $temp = $b / 1024;
+            return self::formatSize($temp, $times + 1);
         } else {
-            return $catalog;
+            $unit = 'B';
+            switch ($times) {
+                case '0':
+                    $unit = 'B';
+                    break;
+                case '1':
+                    $unit = 'KB';
+                    break;
+                case '2':
+                    $unit = 'MB';
+                    break;
+                case '3':
+                    $unit = 'GB';
+                    break;
+                case '4':
+                    $unit = 'TB';
+                    break;
+                case '5':
+                    $unit = 'PB';
+                    break;
+                case '6':
+                    $unit = 'EB';
+                    break;
+                case '7':
+                    $unit = 'ZB';
+                    break;
+                default:
+                    $unit = '单位未知';
+            }
+            return sprintf('%.2f', $b) . $unit;
         }
+
     }
 
     /**
@@ -86,19 +111,4 @@ class OutFormat
         return $code;
     }
 
-    /**
-     * 展示商会名称
-     * @param $shid
-     * @return mixed
-     */
-    public static function formatSh($shid)
-    {
-        if (isset($shid) && $shid != '') {
-            $info = Sh::findOne($shid);
-            if (empty($info) == false) {
-                return $info->nane;
-            }
-        }
-        return $shid;
-    }
 }

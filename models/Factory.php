@@ -41,11 +41,11 @@ class Factory extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'addr' => Yii::t('app', 'Addr'),
-            'tel' => Yii::t('app', 'Tel'),
-            'person' => Yii::t('app', 'Person'),
+            'id' => Yii::t('app', '编号'),
+            'name' => Yii::t('app', '厂名称'),
+            'addr' => Yii::t('app', '通信地址'),
+            'tel' => Yii::t('app', '联系电话'),
+            'person' => Yii::t('app', '责任人'),
         ];
     }
 }

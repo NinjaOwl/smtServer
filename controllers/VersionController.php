@@ -8,6 +8,7 @@ use app\models\VersionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * VersionController implements the CRUD actions for Version model.
@@ -28,6 +29,46 @@ class VersionController extends Controller
             ],
         ];
     }
+
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'trntv\filekit\actions\UploadAction',
+                'multiple' => true,
+                'disableCsrf' => true,
+                'responseFormat' => Response::FORMAT_JSON,
+                'responsePathParam' => 'path',
+                'responseBaseUrlParam' => 'base_url',
+                'responseUrlParam' => 'url',
+                'responseDeleteUrlParam' => 'delete_url',
+                'responseMimeTypeParam' => 'type',
+                'responseNameParam' => 'name',
+                'responseSizeParam' => 'size',
+                'deleteRoute' => 'delete',
+                'fileStorage' => 'fileStorage', // Yii::$app->get('fileStorage')
+                'fileStorageParam' => 'fileStorage', // ?fileStorage=someStorageComponent
+                'sessionKey' => '_uploadedFiles',
+                'allowChangeFilestorage' => false,
+                'validationRules' => [
+
+                ],
+                'on afterSave' => function ($event) {
+                    /* @var $file \League\Flysystem\File */
+//                    $file = $event->file;
+//                    $img = ImageManagerStatic::make($file->read())->fit(500, 500);
+//                    $file->put($img->encode());
+//                     do something (resize, add watermark etc)
+                }
+            ], 'delete2' => [
+                'class' => 'trntv\filekit\actions\DeleteAction',
+                //'fileStorage' => 'fileStorageMy', // my custom fileStorage from configuration(such as in the upload action)
+            ], 'view2' => [
+                'class' => 'trntv\filekit\actions\ViewAction',
+            ]
+        ];
+    }
+
 
     /**
      * Lists all Version models.
@@ -64,10 +105,10 @@ class VersionController extends Controller
     public function actionCreate()
     {
         $model = new Version();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $model['release_time'] = time();
             return $this->render('create', [
                 'model' => $model,
             ]);

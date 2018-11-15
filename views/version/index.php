@@ -25,13 +25,44 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'version_code',
+            [
+                'attribute' => 'version_code',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    return Html::a($data->version_code, "/version/view?id={$data->id}", []);
+                }
+            ],
+
             'version_content',
-            'download_url:url',
-            'file_size',
-            // 'is_latest',
-            // 'is_force',
-            // 'release_time:datetime',
+            [
+                'attribute' => 'download_url',
+                'format' => 'url',
+                'value' => function ($data) {
+                    return \app\tools\OutFormat::formatImage($data->download_url);
+                }
+            ],
+            [
+                'attribute' => 'file_size',
+                'format' => 'url',
+                'value' => function ($data) {
+                    return \app\tools\OutFormat::formatSize($data->file_size);
+                }
+            ],
+            [
+                'attribute' => 'is_latest',
+                'format' => 'url',
+                'value' => function ($data) {
+                    return \app\tools\OutFormat::formatYesNo($data->is_latest);
+                }
+            ],
+            [
+                'attribute' => 'is_force',
+                'format' => 'url',
+                'value' => function ($data) {
+                    return \app\tools\OutFormat::formatYesNo($data->is_force);
+                }
+            ],
+            'release_time:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

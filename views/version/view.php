@@ -31,10 +31,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'version_code',
             'version_content',
-            'download_url:url',
-            'file_size',
-            'is_latest',
-            'is_force',
+            [
+                'attribute' => 'download_url',
+                'format' => 'url',
+                'value' => \app\tools\OutFormat::formatImage($model->download_url),
+            ],
+            [
+                'attribute' => 'file_size',
+                'format' => 'url',
+                'value' => \app\tools\OutFormat::formatSize($model->file_size),
+            ],
+            [
+                'attribute' => 'is_latest',
+                'format' => 'raw',
+                'value' => \app\tools\OutFormat::formatYesNo($model->is_latest),
+            ],
+            [
+                'attribute' => 'is_force',
+                'format' => 'raw',
+                'value' => \app\tools\OutFormat::formatYesNo($model->is_force),
+            ],
             'release_time:datetime',
         ],
     ]) ?>

@@ -45,84 +45,26 @@ class CommonFunc
                         return \app\tools\OutFormat::formatSex($model->gender);
                     },
                 ],
-            'party' => [
-                'attribute' => 'party',
-                'value' => function ($model) {
-                    return \app\tools\OutFormat::formatDict($model->party, \app\tools\Constants::DICT_CONTENT_DP);
-                },
-            ],
-            'nation' => [
-                'attribute' => 'nation',
-                'value' => function ($model) {
-                    return \app\tools\OutFormat::formatDict($model->nation, \app\tools\Constants::DICT_CONTENT_MZ);
-                },
-            ],
-            'education' => [
-                'attribute' => 'education',
-                'value' => function ($model) {
-                    return \app\tools\OutFormat::formatDict($model->education, \app\tools\Constants::DICT_CONTENT_XL);
-                },
-            ],
-            'degree' => [
-                'attribute' => 'degree',
-                'value' => function ($model) {
-                    return \app\tools\OutFormat::formatDict($model->degree, \app\tools\Constants::DICT_CONTENT_XW);
-                },
-            ],
+
             'community' => [
                 'attribute' => 'community',
                 'value' => function ($model) {
                     return \app\tools\OutFormat::formatDict($model->community, \app\tools\Constants::DICT_CONTENT_SQ);
                 },
             ],
-            'group' => [
-                'attribute' => 'group',
+
+            'is_latest' => [
+                'attribute' => 'is_latest',
                 'value' => function ($model) {
-                    return \app\tools\OutFormat::formatDict($model->group, \app\tools\Constants::DICT_CONTENT_XJC_GROUP);
+                    return \app\tools\OutFormat::formatYesNo($model->is_latest);
                 },
             ],
-            'religion' => [
-                'attribute' => 'religion',
-                'value' => function ($model) {
-                    return \app\tools\OutFormat::formatDict($model->religion, \app\tools\Constants::DICT_CONTENT_JB);
-                },
-            ],
-            'shid' => [
-                'attribute' => 'shid',
-                'value' => function ($model) {
-                    return \app\tools\OutFormat::formatSh($model->shid);
-                },
-            ],
-            'category' => [
-                'attribute' => 'category',
-                'value' => function ($model) {
-                    return \app\tools\OutFormat::formatDyType($model->category);
-                },
-            ],
-            'isCPPCC' => [
-                'attribute' => 'isCPPCC',
-                'value' => function ($model) {
-                    return \app\tools\OutFormat::formatYesNo($model->isCPPCC);
-                },
-            ],
-            'isNPC' => [
+            'is_force' => [
                 'attribute' => 'isNPC',
                 'value' => function ($model) {
-                    return \app\tools\OutFormat::formatYesNo($model->isNPC);
+                    return \app\tools\OutFormat::formatYesNo($model->is_force);
                 },
             ],
-            'ispoor' => [
-                'attribute' => 'ispoor',
-                'value' => function ($model) {
-                    return \app\tools\OutFormat::formatYesNo($model->ispoor);
-                },
-            ],
-            'isestablishparty' => [
-                'attribute' => 'isestablishparty',
-                'value' => function ($model) {
-                    return \app\tools\OutFormat::formatYesNo($model->isestablishparty);
-                },
-            ]
         ];
         $newCls = [];
         foreach ($cls as $attributeKey) {
