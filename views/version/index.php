@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'file_size',
-                'format' => 'url',
+                'format' => 'raw',
                 'value' => function ($data) {
                     return \app\tools\OutFormat::formatSize($data->file_size);
                 }
