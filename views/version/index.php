@@ -50,14 +50,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'is_latest',
-                'format' => 'url',
+                'format' => 'raw',
                 'value' => function ($data) {
                     return \app\tools\OutFormat::formatYesNo($data->is_latest);
                 }
             ],
             [
                 'attribute' => 'is_force',
-                'format' => 'url',
+                'format' => 'raw',
                 'value' => function ($data) {
                     return \app\tools\OutFormat::formatYesNo($data->is_force);
                 }
