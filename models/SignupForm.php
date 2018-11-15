@@ -62,7 +62,7 @@ class SignupForm extends Model
         }
 
         // 实现数据入库操作
-        $user = new User();
+        $user = new UserAuth();
         //var_dump($this->created_at);exit;
         $user->username = $this->username;
         $user->email = $this->email;

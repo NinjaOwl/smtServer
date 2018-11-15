@@ -28,18 +28,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+//            'id',
             'name',
-            'sex',
+            [
+                'attribute' => 'sex',
+                'format' => 'raw',
+                'value' => \app\tools\OutFormat::formatSex($model->sex),
+            ],
             'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
             'email:email',
             'status',
-            'created_at',
-            'updated_at',
-            'factory_id',
+            [
+                'attribute' => 'factory_id',
+                'format' => 'raw',
+                'value' => \app\tools\OutFormat::formatFactory($model->factory_id),
+            ],
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 

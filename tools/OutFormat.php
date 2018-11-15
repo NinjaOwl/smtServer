@@ -10,6 +10,7 @@ namespace app\tools;
 
 
 use app\models\Dictcontent;
+use app\models\Factory;
 use app\models\Sh;
 use Yii;
 
@@ -37,6 +38,15 @@ class OutFormat
         }
         $basePath = Yii::$app->getUrlManager()->getHostInfo() . Yii::$app->getUrlManager()->getBaseUrl() . Yii::$app->params['url_path'] . $images;
         return $basePath;
+    }
+
+    public static function formatFactory($id)
+    {
+        $info = Factory::findOne($id);
+        if (empty($info) == false) {
+            return $info->name;
+        }
+        return '';
     }
 
     public static function formatSize($b, $times = 0)

@@ -11,6 +11,7 @@ namespace app\tools;
 
 class Constants
 {
+    const DEFAULT_PASS = '123456';
     const DICT_CONTENT_MZ = 1; //民族
     const DICT_CONTENT_DP = 2; //党派
     const DICT_CONTENT_XL = 3; //学历

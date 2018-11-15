@@ -26,9 +26,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'sex',
+            [
+                'attribute' => 'sex',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    return  \app\tools\OutFormat::formatSex($data->sex);
+                },
+            ],
             'username',
-            'auth_key',
+            [
+                'attribute' => 'factory_id',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    return \app\tools\OutFormat::formatFactory($data->factory_id);
+                },
+            ],
             // 'password_hash',
             // 'password_reset_token',
             // 'email:email',

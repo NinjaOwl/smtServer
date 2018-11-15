@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\UserAuth;
+use app\tools\Constants;
 use Yii;
 use app\models\User;
 use app\models\UserSearch;
@@ -68,6 +70,16 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $model->created_at = time();
+            $model->updated_at = time();
+            $model->status = 1;
+            $model->factory_id = 0;
+            $userAuth = new UserAuth();
+            $userAuth->generateAuthKey();
+            $userAuth->setPassword(Constants::DEFAULT_PASS);
+            $model->auth_key = $userAuth->auth_key;
+            $model->password_hash = $userAuth->password_hash;
+            var_dump($model->password_hash);
             return $this->render('create', [
                 'model' => $model,
             ]);

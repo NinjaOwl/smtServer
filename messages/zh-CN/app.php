@@ -7,6 +7,11 @@ return array(
     'Update {modelClass}: ' => '更新{modelClass}: ',
     'Are you sure you want to delete this item?' => '您确定删除',
 
+    'User' => '用户',
+    'Users' => '用户',
+    'Create User' => '新增用户',
+
+
     'Factory' => '工厂',
     'Factories' => '工厂',
     'Create Factory' => '新增工厂',

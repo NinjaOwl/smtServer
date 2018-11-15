@@ -9,6 +9,7 @@
 namespace app\tools;
 
 
+use app\models\Factory;
 use moonland\phpexcel\Excel;
 use Yii;
 
@@ -19,14 +20,20 @@ class CommonFunc
         return [0 => '女', 1 => '男'];
     }
 
-    public static function getDyTypeList()
-    {
-        return [0 => '预备党员', 1 => '正式党员'];
-    }
 
     public static function getYesNoList()
     {
         return [0 => '否', 1 => '是'];
+    }
+
+    /**
+     * 获取工厂列表
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getFactoryList()
+    {
+        return Factory::find()
+            ->select(['name as value', 'name as  label', 'id as id'])->asArray()->all();
     }
 
     /**
@@ -118,10 +125,5 @@ class CommonFunc
             'headers' => $labels,
             'fileName' => $fileName
         ]);
-    }
-
-    public static function getPartyNumList()
-    {
-        return ["0-19" => '20人以下', "20-49" => '20到49人', "50-99" => '50到99人', "100-199" => '100到199人', "200-" => '200人以上',];
     }
 }

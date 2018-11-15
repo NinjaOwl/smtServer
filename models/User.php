@@ -37,9 +37,11 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['sex', 'status', 'created_at', 'updated_at', 'factory_id'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
+            [['name', 'sex', 'username', 'auth_key', 'password_hash', 'created_at', 'updated_at'], 'required'],
             [['name', 'username', 'auth_key'], 'string', 'max' => 32],
             [['password_hash', 'password_reset_token', 'email'], 'string', 'max' => 256],
+            ['username', 'unique'],
+            ['email', 'email']
         ];
     }
 
@@ -50,17 +52,17 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', '真实姓名'),
+            'name' => Yii::t('app', '姓名'),
             'sex' => Yii::t('app', '性别'),
-            'username' => Yii::t('app', 'Username'),
+            'username' => Yii::t('app', '用户名'),
             'auth_key' => Yii::t('app', 'Auth Key'),
-            'password_hash' => Yii::t('app', 'Password Hash'),
+            'password_hash' => Yii::t('app', '密码'),
             'password_reset_token' => Yii::t('app', 'Password Reset Token'),
-            'email' => Yii::t('app', 'Email'),
-            'status' => Yii::t('app', 'Status'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'factory_id' => Yii::t('app', '工厂编号'),
+            'email' => Yii::t('app', '邮箱'),
+            'status' => Yii::t('app', '状态'),
+            'created_at' => Yii::t('app', '创建时间'),
+            'updated_at' => Yii::t('app', '更新时间'),
+            'factory_id' => Yii::t('app', '工厂'),
         ];
     }
 }
