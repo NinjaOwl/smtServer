@@ -23,14 +23,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
-            'name',
+            [
+                'attribute' => 'name',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    return Html::a($data->name, "/user/view?id={$data->id}", []);
+                }
+            ],
             [
                 'attribute' => 'sex',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    return  \app\tools\OutFormat::formatSex($data->sex);
+                    return \app\tools\OutFormat::formatSex($data->sex);
                 },
             ],
             'username',
