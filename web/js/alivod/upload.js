@@ -23,9 +23,6 @@ var uploader = new AliyunUpload.Vod({
             //https://help.aliyun.com/document_detail/55408.html?spm=a2c4g.11186623.6.630.BoYYcY
             //获取上传凭证后，调用setUploadAuthAndAddress
             // uploader.resumeUploadWithAuth(uploadAuth);
-        } else if (isSTSMode()) {
-            // 实现时，从新获取STS临时账号用于恢复上传
-            // uploader.resumeUploadWithSTSToken(accessKeyId, accessKeySecret, secretToken, expireTime);
         }
     },
     onUploadCanceled:function(uploadInfo)
@@ -37,24 +34,47 @@ var uploader = new AliyunUpload.Vod({
         if (isVodMode()) {
             if(!uploadInfo.videoId)//这个文件没有上传异常
             {
-                //mock 上传凭证，实际产品中需要通过接口获取
-                var uploadAuth = document.getElementById("uploadAuth").value;
-                var uploadAddress = document.getElementById("uploadAddress").value;
-                var videoId = document.getElementById("videoId").value;
-                //实际环境中调用调用点播的获取上传凭证接口
-                //https://help.aliyun.com/document_detail/55407.html?spm=a2c4g.11186623.6.629.CH7i3X
-                //获取上传凭证后，调用setUploadAuthAndAddress
-                uploader.setUploadAuthAndAddress(uploadInfo, uploadAuth, uploadAddress,videoId);
+
+                var name = $("#resources-name").val();
+                if($.trim(name) == ""){
+                    alert("请设置资源名称");
+                    return false;
+                }
+                $.post("/resources/auth",{"fileName":uploadInfo.file.name, "title":name},function(res){
+                    if(res.code == 200){
+                        $("#uploadAuth").val(res.data.UploadAuth);
+                        //实际环境中调用调用点播的获取上传凭证接口
+                        //https://help.aliyun.com/document_detail/55407.html?spm=a2c4g.11186623.6.629.CH7i3X
+                        //获取上传凭证后，调用setUploadAuthAndAddress
+                        uploader.setUploadAuthAndAddress(uploadInfo, res.data.UploadAuth, res.data.UploadAddress,res.data.videoId);
+                    }else{
+                        alert(res.msg);
+                    }
+
+                },'json');
+
             }
             else//如果videoId有值，根据videoId刷新上传凭证
             {
-                //mock 上传凭证 实际产品中需要通过接口获取
-                var uploadAuth = document.getElementById("uploadAuth").value;
-                var uploadAddress = document.getElementById("uploadAddress").value;
-                //实际环境中调用点播的刷新上传凭证接口，获取凭证
-                //https://help.aliyun.com/document_detail/55408.html?spm=a2c4g.11186623.6.630.BoYYcY
-                //获取上传凭证后，调用setUploadAuthAndAddress
-                uploader.setUploadAuthAndAddress(uploadInfo, uploadAuth, uploadAddress);
+                var name = $("#resources-name").val();
+                if($.trim(name) == ""){
+                    alert("请设置资源名称");
+                    return false;
+                }
+                $.post("/resources/auth",{"fileName":uploadInfo.file.name, "title":name},function(res){
+                    // console.log(res)
+                    //mock 上传凭证 实际产品中需要通过接口获取
+                    //实际环境中调用点播的刷新上传凭证接口，获取凭证
+                    //https://help.aliyun.com/document_detail/55408.html?spm=a2c4g.11186623.6.630.BoYYcY
+                    //获取上传凭证后，调用setUploadAuthAndAddress
+                    if(res.code == 200) {
+                        $("#uploadAuth").val(res.data.UploadAuth);
+                        uploader.setUploadAuthAndAddress(uploadInfo, res.data.UploadAuth, res.data.UploadAddress);
+                    }else{
+                        alert(res.msg);
+                    }
+                },'json');
+
             }
         }
     }
@@ -83,9 +103,7 @@ var getCheckpoint = function()
 // 点播上传。每次上传都是独立的鉴权，所以初始化时，不需要设置鉴权
 // 临时账号过期时，在onUploadTokenExpired事件中，用resumeWithToken更新临时账号，上传会续传。
 var selectFile = function (event) {
-    var endpoint = document.getElementById("endpoint").value;
-    var bucket = document.getElementById("bucket").value;
-    var objectPre = document.getElementById("objectPre").value;
+
     var userData = '{"Vod":{"StorageLocation":"","UserData":{"IsShowWaterMark":"false","Priority":"7"}}}';
     for(var i=0; i<event.target.files.length; i++) {
         log("add file: " + event.target.files[i].name);
@@ -111,10 +129,6 @@ function stop() {
 function resumeWithToken() {
     log("resume upload with token.");
     var uploadAuth = document.getElementById("uploadAuth").value;
-
-    var accessKeyId = document.getElementById("accessKeyId").value;
-    var accessKeySecret = document.getElementById("accessKeySecret").value;
-    var secretToken = document.getElementById("secretToken").value;
     uploader.resumeUploadWithAuth(uploadAuth);
 
 }
@@ -194,7 +208,6 @@ function log(value) {
 }
 
 function isVodMode() {
-    var uploadAuth = document.getElementById("uploadAuth").value;
-    return (uploadAuth && uploadAuth.length > 0);
+    return true;
 }
 

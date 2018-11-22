@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'desc')->textInput(['maxlength' => true]) ?>
-     <input type="file" name="files"/>
+     <input type="file" name="files" id="files"/>
     <div style="display: none;">
         <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'thumb')->textInput(['maxlength' => true]) ?>
@@ -27,8 +27,10 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'createTime')->textInput() ?>
         <?= $form->field($model, 'createUser')->textInput(['maxlength' => true]) ?>
     </div>
-    <textarea cols="20" rows="10"></textarea>
+    <select name=textarea id="textarea" style="width: 300px; height: 80px"></select>
     <div class="form-group">
+        <input type="button" id="button" onclick="start();" name="button" value="上传">
+        <input type="hidden" id="uploadAuth" name="uploadAuth">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
