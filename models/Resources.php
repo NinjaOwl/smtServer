@@ -18,6 +18,7 @@ use Yii;
  * @property string $url
  * @property integer $createTime
  * @property string $createUser
+ * @property string $videoId
  */
 class Resources extends \yii\db\ActiveRecord
 {
