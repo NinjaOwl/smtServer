@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\tools\OutFormat;
+use app\tools\OutTools;
+use app\tools\VodTools;
 use Yii;
 use app\models\Resources;
 use app\models\ResourcesSearch;
@@ -42,6 +45,22 @@ class ResourcesController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    /**
+     * 获取凭证
+     */
+    public function actionAuth()
+    {
+        $title = Yii::$app->request->post('title');
+        $fileName = Yii::$app->request->post('fileName');
+        $vodTools = new VodTools();
+        try {
+            $res = $vodTools->create_upload_video($title, $fileName);
+            OutTools::outJsonP(OutTools::success($res));
+        } catch (\Exception $e) {
+            OutTools::outJsonP(OutTools::error($e->getCode(), $e->getMessage()));
+        }
     }
 
     /**

@@ -79,7 +79,6 @@ class UserController extends Controller
             $userAuth->setPassword(Constants::DEFAULT_PASS);
             $model->auth_key = $userAuth->auth_key;
             $model->password_hash = $userAuth->password_hash;
-            var_dump($model->password_hash);
             return $this->render('create', [
                 'model' => $model,
             ]);

@@ -20,17 +20,19 @@ class VodTools
     public $regionId;
     public $client;
 
-    public function __construct($regionId, $access_key_id, $access_key_secret)
+    public function __construct()
     {
-        $this->regionId = $regionId;
-        $profile = DefaultProfile::getProfile($regionId, $access_key_id, $access_key_secret);
+        $this->regionId = \Yii::$app->params['vod']['region_id'];
+        $access_key_id= \Yii::$app->params['vod']['access_key_id'];
+        $access_key_secret= \Yii::$app->params['vod']['access_key_secret'];
+        $profile = DefaultProfile::getProfile($this->regionId, $access_key_id, $access_key_secret);
         $this->client = new DefaultAcsClient($profile);
     }
 
     /**
      * 上传接口
      * @param $title
-     * @param $filePath
+     * @param $fileName
      * @param int $fileSize
      * @param string $description
      * @param string $coverUrl
@@ -39,13 +41,13 @@ class VodTools
      * @param int $cateId
      * @return mixed|\SimpleXMLElement
      */
-    function create_upload_video($title, $filePath, $fileSize = 0, $description = "", $coverUrl = "", $ip = "127.0.0.1", $tags = "", $cateId = 0)
+    function create_upload_video($title, $fileName, $fileSize = 0, $description = "", $coverUrl = "", $ip = "127.0.0.1", $tags = "", $cateId = 0)
     {
         $request = new CreateUploadVideoRequest();
         //视频源文件标题(必选)
         $request->setTitle($title);
         //视频源文件名称，必须包含扩展名(必选)
-        $request->setFileName($filePath);
+        $request->setFileName($fileName);
         //视频源文件字节数(可选)
         $request->setFileSize($fileSize);
         //视频源文件描述(可选)

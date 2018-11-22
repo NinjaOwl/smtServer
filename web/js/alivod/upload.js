@@ -86,27 +86,10 @@ var selectFile = function (event) {
     var endpoint = document.getElementById("endpoint").value;
     var bucket = document.getElementById("bucket").value;
     var objectPre = document.getElementById("objectPre").value;
-    var userData;
-    if (isVodMode()) {
-        userData = '{"Vod":{"StorageLocation":"","UserData":{"IsShowWaterMark":"false","Priority":"7"}}}';
-    } else {
-        userData = '{"Vod":{"StorageLocation":"","Title":"this is title.我是标题","Description":"this is desc.我是描述","CateId":"19","Tags":"tag1,tag2,标签3"}}';
-    }
-
+    var userData = '{"Vod":{"StorageLocation":"","UserData":{"IsShowWaterMark":"false","Priority":"7"}}}';
     for(var i=0; i<event.target.files.length; i++) {
         log("add file: " + event.target.files[i].name);
-        if (isVodMode()) {
-            // 点播上传。每次上传都是独立的OSS object，所以添加文件时，不需要设置OSS的属性
-            uploader.addFile(event.target.files[i], null, null, null, userData);
-        } else if(isSTSMode()) {
-            // STS的上传方式，需要在userData里指定Title
-            var object = objectPre;
-            // if(objectPre)
-            // {
-            //     object = objectPre +"/"+ event.target.files[i].name;
-            // }
-            uploader.addFile(event.target.files[i], endpoint, bucket, object , userData);
-        }
+        uploader.addFile(event.target.files[i], null, null, null, userData);
     }
 };
 
@@ -132,12 +115,8 @@ function resumeWithToken() {
     var accessKeyId = document.getElementById("accessKeyId").value;
     var accessKeySecret = document.getElementById("accessKeySecret").value;
     var secretToken = document.getElementById("secretToken").value;
+    uploader.resumeUploadWithAuth(uploadAuth);
 
-    if (isVodMode()) {
-        uploader.resumeUploadWithAuth(uploadAuth);
-    } else if (isSTSMode()) {
-        uploader.resumeUploadWithSTSToken(accessKeyId, accessKeySecret, secretToken);
-    }
 }
 
 function clearInputFile()

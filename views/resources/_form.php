@@ -8,9 +8,6 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Resources */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-<script src="./lib/es6-promise.min.js"></script>
-<script src="./lib/aliyun-oss-sdk-5.2.0.min.js"></script>
-<script src="./aliyun-upload-sdk-1.4.0.min.js"></script>
 <div class="resources-form">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -19,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'desc')->textInput(['maxlength' => true]) ?>
-
+     <input type="file" name="files"/>
     <div style="display: none;">
         <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'thumb')->textInput(['maxlength' => true]) ?>
@@ -30,6 +27,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'createTime')->textInput() ?>
         <?= $form->field($model, 'createUser')->textInput(['maxlength' => true]) ?>
     </div>
+    <textarea cols="20" rows="10"></textarea>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
@@ -38,8 +36,8 @@ use yii\widgets\ActiveForm;
 
 </div>
 <?php
-\app\assets\WxAsset::addJs($this, 'js/alivod/lib/es6-promise.min.js');
-\app\assets\WxAsset::addJs($this, 'js/alivod/lib/aliyun-oss-sdk-5.2.0.min.js');
-\app\assets\WxAsset::addJs($this, 'js/alivod/aliyun-upload-sdk-1.4.0.min.js');
-\app\assets\WxAsset::addJs($this, 'js/alivod/upload.js');
+\app\assets\AppAsset::addJs($this, 'js/alivod/lib/es6-promise.min.js');
+\app\assets\AppAsset::addJs($this, 'js/alivod/lib/aliyun-oss-sdk-5.2.0.min.js');
+\app\assets\AppAsset::addJs($this, 'js/alivod/aliyun-upload-sdk-1.4.0.min.js');
+\app\assets\AppAsset::addJs($this, 'js/alivod/upload.js');
 ?>

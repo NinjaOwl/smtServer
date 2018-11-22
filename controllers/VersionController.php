@@ -106,9 +106,11 @@ class VersionController extends Controller
     {
         $model = new Version();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Version::updateAll(array('is_latest' => 0), 'id!=:id', array(':id' => $model->id));
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            $model['release_time'] = time();
+            $model->release_time = time();
+            $model->is_latest = 1;
             return $this->render('create', [
                 'model' => $model,
             ]);

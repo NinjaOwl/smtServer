@@ -34,7 +34,9 @@ use yii\web\JsExpression;
     ?>
 
     <?= $form->field($model, 'is_force')->radioList(\app\tools\CommonFunc::getYesNoList()) ?>
-    <?= $form->field($model, 'is_latest')->radioList(\app\tools\CommonFunc::getYesNoList()) ?>
+    <div style="display: none;">
+        <?= $form->field($model, 'is_latest')->radioList(\app\tools\CommonFunc::getYesNoList()) ?>
+    </div>
     <div style="display: none;"><?= $form->field($model, 'release_time')->textInput() ?></div>
     <div style="display: none;"><?= $form->field($model, 'file_size')->textInput() ?></div>
     <div class="form-group">

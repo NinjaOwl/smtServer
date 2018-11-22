@@ -35,14 +35,15 @@ class CommonController extends Controller
         ];
     }
 
-    public function actionTest(){
+    public function actionTest()
+    {
 
 
         $access_key_id = "LTAIT6i1ygTpXaxx";
         $access_key_secret = "6CkBqsEAc58Vf5tCEcpm6HY3YMNSET";
         $regionId = 'cn-shanghai';
         $vodTools = new VodTools($regionId, $access_key_id, $access_key_secret);
-//        $res = $vodTools->create_upload_video("test","a39b9c266c7e477a1ec6bcf6faafe4f7.mp4");
+        $res = $vodTools->create_upload_video("test","a39b9c266c7e477a1ec6bcf6faafe4f7.mp4");
 //        echo "<pre>";
 //        print_r($res);
 //        echo "</pre>";
@@ -51,4 +52,6 @@ class CommonController extends Controller
         print_r($res);
         echo "</pre>";
     }
+
+  
 }
