@@ -1,11 +1,53 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a3c5a824ba4c3c228c266c8aedbf5a9",
+    "content-hash": "e1a7a1d6d884e3c8239e4dbd7e724501",
     "packages": [
+        {
+            "name": "alivod/vod",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xietian/aliyun.git",
+                "reference": "febadfca36c5cc74bfeb553f6af462660976dc70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xietian/aliyun/zipball/febadfca36c5cc74bfeb553f6af462660976dc70",
+                "reference": "febadfca36c5cc74bfeb553f6af462660976dc70",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "core\\": "src/core",
+                    "vod\\Request\\V20170321\\": "src/vod/Request/V20170321/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "andy"
+                }
+            ],
+            "description": "alivod service inlcude vod oss etc.",
+            "homepage": "https://github.com/xietian",
+            "keywords": [
+                "alivod",
+                "oos",
+                "vod"
+            ],
+            "time": "2018-11-22T06:48:12+00:00"
+        },
         {
             "name": "almasaeed2010/adminlte",
             "version": "v2.3.8",
@@ -1201,6 +1243,7 @@
                 "xls",
                 "xlsx"
             ],
+            "abandoned": "phpoffice/phpspreadsheet",
             "time": "2015-05-01T07:00:55+00:00"
         },
         {
@@ -1310,12 +1353,12 @@
             "version": "1.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/trntv/yii2-file-kit.git",
+                "url": "https://github.com/yii2-starter-kit/yii2-file-kit.git",
                 "reference": "0b24b638b7bc8f41d75d4d5428188035052ee890"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/trntv/yii2-file-kit/zipball/0b24b638b7bc8f41d75d4d5428188035052ee890",
+                "url": "https://api.github.com/repos/yii2-starter-kit/yii2-file-kit/zipball/0b24b638b7bc8f41d75d4d5428188035052ee890",
                 "reference": "0b24b638b7bc8f41d75d4d5428188035052ee890",
                 "shasum": ""
             },
@@ -1352,6 +1395,7 @@
                 }
             ],
             "description": "Yii2 file upload and storage kit",
+            "abandoned": "yii2-starter-kit/yii2-file-kit",
             "time": "2017-01-16T10:32:27+00:00"
         },
         {

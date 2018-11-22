@@ -23,6 +23,10 @@ class ComposerStaticInit0fb7274d6961f08116ce84af67e50509
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
+        'v' => 
+        array (
+            'vod\\Request\\V20170321\\' => 22,
+        ),
         't' => 
         array (
             'trntv\\filekit\\' => 14,
@@ -50,6 +54,7 @@ class ComposerStaticInit0fb7274d6961f08116ce84af67e50509
         'c' => 
         array (
             'creocoder\\flysystem\\' => 20,
+            'core\\' => 5,
             'cebe\\markdown\\' => 14,
         ),
         'P' => 
@@ -107,6 +112,10 @@ class ComposerStaticInit0fb7274d6961f08116ce84af67e50509
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
+        'vod\\Request\\V20170321\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/alivod/vod/src/vod/Request/V20170321',
+        ),
         'trntv\\filekit\\' => 
         array (
             0 => __DIR__ . '/..' . '/trntv/yii2-file-kit/src',
@@ -146,6 +155,10 @@ class ComposerStaticInit0fb7274d6961f08116ce84af67e50509
         'creocoder\\flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/creocoder/yii2-flysystem/src',
+        ),
+        'core\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/alivod/vod/src/core',
         ),
         'cebe\\markdown\\' => 
         array (

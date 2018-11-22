@@ -27,7 +27,8 @@
         "trntv/yii2-file-kit": "^1.2",
         "intervention/image": "^2.4",
         "bower-asset/echarts": "^3.7",
-        "daixianceng/yii2-echarts": "^1.0"
+        "daixianceng/yii2-echarts": "^1.0",
+        "alivod/vod": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
