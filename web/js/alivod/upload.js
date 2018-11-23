@@ -5,10 +5,13 @@ var uploader = new AliyunUpload.Vod({
     // 文件上传失败
     'onUploadFailed': function (uploadInfo, code, message) {
         log("onUploadFailed: file:" + uploadInfo.file.name + ",code:" + code + ", message:" + message);
+        alert("文件上传失败")
     },
     // 文件上传完成
     'onUploadSucceed': function (uploadInfo) {
         log("onUploadSucceed: " + uploadInfo.file.name + ", endpoint:" + uploadInfo.endpoint + ", bucket:" + uploadInfo.bucket + ", object:" + uploadInfo.object);
+        // $("#w0").trigger('submit');
+        // $("#w0").trigger('submit');
     },
     // 文件上传进度
     'onUploadProgress': function (uploadInfo, totalSize, loadedPercent) {
@@ -25,76 +28,76 @@ var uploader = new AliyunUpload.Vod({
             // uploader.resumeUploadWithAuth(uploadAuth);
         }
     },
-    onUploadCanceled:function(uploadInfo)
-    {
+    onUploadCanceled: function (uploadInfo) {
         log("onUploadCanceled:file:" + uploadInfo.file.name);
     },
     // 开始上传
     'onUploadstarted': function (uploadInfo) {
         if (isVodMode()) {
-            if(!uploadInfo.videoId)//这个文件没有上传异常
+            if (!uploadInfo.videoId)//这个文件没有上传异常
             {
 
                 var name = $("#resources-name").val();
-                if($.trim(name) == ""){
+                if ($.trim(name) == "") {
                     alert("请设置资源名称");
                     return false;
                 }
-                $.post("/resources/auth",{"fileName":uploadInfo.file.name, "title":name},function(res){
-                    if(res.code == 200){
+                $.post("/resources/auth", {"fileName": uploadInfo.file.name, "title": name}, function (res) {
+                    if (res.code == 200) {
                         $("#uploadAuth").val(res.data.UploadAuth);
+
+                        $("#resources-third_resource_id").val(res.data.VideoId);
+                        // alert( $("#resources-third_resource_id").val());
                         //实际环境中调用调用点播的获取上传凭证接口
                         //https://help.aliyun.com/document_detail/55407.html?spm=a2c4g.11186623.6.629.CH7i3X
                         //获取上传凭证后，调用setUploadAuthAndAddress
-                        uploader.setUploadAuthAndAddress(uploadInfo, res.data.UploadAuth, res.data.UploadAddress,res.data.videoId);
-                    }else{
+                        uploader.setUploadAuthAndAddress(uploadInfo, res.data.UploadAuth, res.data.UploadAddress, res.data.VideoId);
+                    } else {
                         alert(res.msg);
                     }
 
-                },'json');
+                }, 'json');
 
             }
             else//如果videoId有值，根据videoId刷新上传凭证
             {
                 var name = $("#resources-name").val();
-                if($.trim(name) == ""){
+                if ($.trim(name) == "") {
                     alert("请设置资源名称");
                     return false;
                 }
-                $.post("/resources/auth",{"fileName":uploadInfo.file.name, "title":name},function(res){
+                $.post("/resources/auth", {"fileName": uploadInfo.file.name, "title": name}, function (res) {
                     // console.log(res)
                     //mock 上传凭证 实际产品中需要通过接口获取
                     //实际环境中调用点播的刷新上传凭证接口，获取凭证
                     //https://help.aliyun.com/document_detail/55408.html?spm=a2c4g.11186623.6.630.BoYYcY
                     //获取上传凭证后，调用setUploadAuthAndAddress
-                    if(res.code == 200) {
+                    if (res.code == 200) {
                         $("#uploadAuth").val(res.data.UploadAuth);
+                        $("#resources-third_resource_id").val(uploadInfo.videoId);
                         uploader.setUploadAuthAndAddress(uploadInfo, res.data.UploadAuth, res.data.UploadAddress);
-                    }else{
+                    } else {
                         alert(res.msg);
                     }
-                },'json');
+                }, 'json');
 
             }
         }
     }
     ,
-    'onUploadEnd':function(uploadInfo){
+    'onUploadEnd': function (uploadInfo) {
         log("onUploadEnd: uploaded all the files");
     }
 });
 
-var getCheckpoint = function()
-{
+var getCheckpoint = function () {
     var list = uploader.listFiles();
-    for (var i=0; i<list.length; i++) {
+    for (var i = 0; i < list.length; i++) {
         var value = uploader.getCheckpoint(list[i].file);
-        if(value)
-        {
-            log(list[i].file.name + ' checkpoint: videoId=' + value.videoId + ' loaded='+value.loaded + ' state=' + value.state);
+        if (value) {
+            log(list[i].file.name + ' checkpoint: videoId=' + value.videoId + ' loaded=' + value.loaded + ' state=' + value.state);
         }
-        else
-        {
+        else {
             log(list[i].file.name + ' no checkpoint.');
         }
     }
@@ -105,20 +108,32 @@ var getCheckpoint = function()
 var selectFile = function (event) {
 
     var userData = '{"Vod":{"StorageLocation":"","UserData":{"IsShowWaterMark":"false","Priority":"7"}}}';
-    for(var i=0; i<event.target.files.length; i++) {
+    for (var i = 0; i < event.target.files.length; i++) {
         log("add file: " + event.target.files[i].name);
         uploader.addFile(event.target.files[i], null, null, null, userData);
     }
 };
 
-document.getElementById("files")
+document.getElementById("resources-files")
     .addEventListener('change', selectFile);
 
-var textarea=document.getElementById("textarea");
+var textarea = document.getElementById("textarea");
 
 function start() {
     log("start upload.");
-    uploader.startUpload();
+    var name = $("#resources-name").val();
+    if ($.trim(name) == "") {
+        alert("请设置资源名称");
+        return false;
+    }
+    var list = uploader.listFiles();
+    if (list.length > 0) {
+        uploader.startUpload();
+    } else {
+        alert("请选择要上传的文件");
+        return false;
+    }
+
 }
 
 function stop() {
@@ -133,18 +148,16 @@ function resumeWithToken() {
 
 }
 
-function clearInputFile()
-{
-    var ie = (navigator.appVersion.indexOf("MSIE")!=-1);
-    if( ie ){
-        var file = document.getElementById("files");
-        var file2= file.cloneNode(false);
+function clearInputFile() {
+    var ie = (navigator.appVersion.indexOf("MSIE") != -1);
+    if (ie) {
+        var file = document.getElementById("resources-files");
+        var file2 = file.cloneNode(false);
         file2.addEventListener('change', selectFile);
-        file.parentNode.replaceChild(file2,file);
+        file.parentNode.replaceChild(file2, file);
     }
-    else
-    {
-        document.getElementById("files").value = '';
+    else {
+        document.getElementById("resources-files").value = '';
     }
 
 }
@@ -157,14 +170,14 @@ function clearList() {
 function getList() {
     log("get upload list.");
     var list = uploader.listFiles();
-    for (var i=0; i<list.length; i++) {
+    for (var i = 0; i < list.length; i++) {
         log("file:" + list[i].file.name + ", status:" + list[i].state + ", endpoint:" + list[i].endpoint + ", bucket:" + list[i].bucket + ", object:" + list[i].object);
     }
 }
 
 function deleteFile() {
     if (document.getElementById("deleteIndex").value) {
-        var index = document.getElementById("deleteIndex").value
+        var index = document.getElementById("deleteIndex").value;
         log("delete file index:" + index);
         uploader.deleteFile(index);
     }
@@ -196,14 +209,14 @@ function log(value) {
     }
 
     var len = textarea.options.length;
-    if (len > 0 && textarea.options[len-1].value.substring(0, 40) == value.substring(0, 40)) {
+    if (len > 0 && textarea.options[len - 1].value.substring(0, 40) == value.substring(0, 40)) {
         //textarea.remove(len-1);
     } else if (len > 25) {
         textarea.remove(0);
     }
 
-    var option=document.createElement("option");
-    option.value=value,option.innerHTML=value;
+    var option = document.createElement("option");
+    option.value = value, option.innerHTML = value;
     textarea.appendChild(option);
 }
 

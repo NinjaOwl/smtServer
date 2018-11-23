@@ -18,8 +18,8 @@ class ResourcesSearch extends Resources
     public function rules()
     {
         return [
-            [['id', 'fid', 'size', 'times', 'createTime'], 'integer'],
-            [['name', 'desc', 'suffix', 'thumb', 'url', 'createUser'], 'safe'],
+            [['id', 'size', 'duration', 'created_at', 'creator_id'], 'integer'],
+            [['name', 'desc', 'suffix', 'thumb', 'url'], 'safe'],
         ];
     }
 
@@ -60,10 +60,9 @@ class ResourcesSearch extends Resources
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'fid' => $this->fid,
             'size' => $this->size,
-            'times' => $this->times,
-            'createTime' => $this->createTime,
+            'duration' => $this->duration,
+            'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
@@ -71,7 +70,7 @@ class ResourcesSearch extends Resources
             ->andFilterWhere(['like', 'suffix', $this->suffix])
             ->andFilterWhere(['like', 'thumb', $this->thumb])
             ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'createUser', $this->createUser]);
+            ->andFilterWhere(['like', 'creator_id', $this->creator_id]);
 
         return $dataProvider;
     }

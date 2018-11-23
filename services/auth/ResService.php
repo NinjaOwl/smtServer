@@ -33,16 +33,18 @@ class ResService
         if (empty($factoryId) == false) {
             $condition .= " and fid=:factory_id";
             $param[":factory_id"] = $factoryId;
-        }
-        if (empty($resName) == false) {
-            $condition .= " and name like :name";
-            $param[":name"] = "%" . $resName . "%";
-        }
-        $totalCount = Resources::find()->where($condition, $param)->count();
-        $offset = ($page - 1) * $max;
-        $array = Resources::find()->where($condition, $param)->asArray()->offset($offset)->limit($max)->all();
+        }else{
+            if (empty($resName) == false) {
+                $condition .= " and name like :name";
+                $param[":name"] = "%" . $resName . "%";
+            }
+            $totalCount = Resources::find()->where($condition, $param)->count();
+            $offset = ($page - 1) * $max;
+            $array = Resources::find()->where($condition, $param)->asArray()->offset($offset)->limit($max)->all();
 
-        return OutTools::success(array('list' => FormatResList::format($array), 'paging' => FormatPaging::format($totalCount, $max, $page)));
+            return OutTools::success(array('list' => FormatResList::format($array), 'paging' => FormatPaging::format($totalCount, $max, $page)));
+        }
+        
     }
 
     /**

@@ -8,35 +8,53 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Resources */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-<div class="resources-form">
+    <div class="resources-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'fid')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'desc')->textarea(['maxlength' => true]) ?>
+        <?php
+        if ($model->isNewRecord) {
+            ?>
+            <?= $form->field($model, 'files')->fileInput([]) ?>
+            <?php
+        }
+        ?>
+        <div style="display: none;">
+            <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'thumb')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'suffix')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'size')->textInput() ?>
+            <?= $form->field($model, 'duration')->textInput() ?>
+            <?= $form->field($model, 'convert_status')->textInput() ?>
+            <?= $form->field($model, 'created_at')->textInput() ?>
+            <?= $form->field($model, 'creator_id')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'third_resource_id')->textInput() ?>
+            <?= $form->field($model, 'visit_num')->textInput() ?>
+        </div>
+        <div class="form-group">
+            <select name=textarea id="textarea" style="width: 300px; height: 80px; "></select>
+            <?php
+            if ($model->isNewRecord) {
+                ?>
+                <input type="hidden" id="uploadAuth" name="uploadAuth"><input type="button" id="button"
+                                                                              class="btn btn-success" onclick="start();"
+                                                                              name="button" value="上传">
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'id' => 'submit']) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'desc')->textInput(['maxlength' => true]) ?>
-     <input type="file" name="files" id="files"/>
-    <div style="display: none;">
-        <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'thumb')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'suffix')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'size')->textInput() ?>
-        <?= $form->field($model, 'times')->textInput() ?>
-        <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'createTime')->textInput() ?>
-        <?= $form->field($model, 'createUser')->textInput(['maxlength' => true]) ?>
+                <?php
+            } else {
+                ?>
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?php
+            }
+            ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
     </div>
-    <select name=textarea id="textarea" style="width: 300px; height: 80px"></select>
-    <div class="form-group">
-        <input type="button" id="button" onclick="start();" name="button" value="上传">
-        <input type="hidden" id="uploadAuth" name="uploadAuth">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
-</div>
 <?php
 \app\assets\AppAsset::addJs($this, 'js/alivod/lib/es6-promise.min.js');
 \app\assets\AppAsset::addJs($this, 'js/alivod/lib/aliyun-oss-sdk-5.2.0.min.js');

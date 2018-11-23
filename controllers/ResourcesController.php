@@ -70,8 +70,25 @@ class ResourcesController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        //获取视频信息
+        if ($model->convert_status == Resources::CONVERT_STATUS_CONVERTING) {
+            $vodtools = new VodTools();
+            $info = $vodtools->get_play_info($model->third_resource_id);
+            $data = array();
+            if ($info['VideoBase']['Status'] == 'Normal') {
+                $data['duration'] = $info['PlayInfoList']['PlayInfo'][1]['Duration'];
+                $data['url'] = $info['PlayInfoList']['PlayInfo'][1]['PlayURL'];
+                $data['size'] = $info['PlayInfoList']['PlayInfo'][1]['Size'];
+                $data['thumb'] = $info['VideoBase']['CoverURL'];
+                $data['convert_status'] = Resources::CONVERT_STATUS_FISHING;
+                $data['suffix'] = $info['PlayInfoList']['PlayInfo'][1]['Format'];
+                Resources::updateAll($data, 'id=:id', array(':id' => $id));
+                $model = $this->findModel($id);
+            }
+        }
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -87,6 +104,13 @@ class ResourcesController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $model->size = 0;
+            $model->convert_status = Resources::CONVERT_STATUS_CONVERTING;
+            $model->visit_num = 0;
+            $model->duration = 0;
+            $model->created_at = time();
+            $model->creator_id = Yii::$app->getUser()->getId();
+            var_dump($model->errors);
             return $this->render('create', [
                 'model' => $model,
             ]);

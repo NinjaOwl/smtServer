@@ -12,6 +12,7 @@ namespace app\tools;
 use core\DefaultAcsClient;
 use core\Profile\DefaultProfile;
 use vod\Request\V20170321\CreateUploadVideoRequest;
+use vod\Request\V20170321\GetPlayInfoRequest;
 use vod\Request\V20170321\GetVideoInfoRequest;
 use vod\Request\V20170321\RefreshUploadVideoRequest;
 
@@ -23,8 +24,8 @@ class VodTools
     public function __construct()
     {
         $this->regionId = \Yii::$app->params['vod']['region_id'];
-        $access_key_id= \Yii::$app->params['vod']['access_key_id'];
-        $access_key_secret= \Yii::$app->params['vod']['access_key_secret'];
+        $access_key_id = \Yii::$app->params['vod']['access_key_id'];
+        $access_key_secret = \Yii::$app->params['vod']['access_key_secret'];
         $profile = DefaultProfile::getProfile($this->regionId, $access_key_id, $access_key_secret);
         $this->client = new DefaultAcsClient($profile);
     }
@@ -93,6 +94,18 @@ class VodTools
     public function get_video_info($videoId)
     {
         $request = new GetVideoInfoRequest();
+        //视频ID(必选)
+        $request->setVideoId($videoId);
+        $response = $this->client->getAcsResponse($request);
+//        $obj = simplexml_load_string($response, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $responseStr = json_encode($response);
+        $jsonArray = json_decode($responseStr, true);
+        return $jsonArray;
+    }
+
+    public function get_play_info($videoId)
+    {
+        $request = new GetPlayInfoRequest();
         //视频ID(必选)
         $request->setVideoId($videoId);
         $response = $this->client->getAcsResponse($request);
