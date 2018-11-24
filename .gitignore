@@ -27,3 +27,5 @@ phpunit.phar
 /phpunit.xml
 web/assets/*
 runtime/
+web/demo
+web/upload
