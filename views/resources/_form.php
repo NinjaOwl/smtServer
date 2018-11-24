@@ -18,6 +18,7 @@ use yii\widgets\ActiveForm;
         if ($model->isNewRecord) {
             ?>
             <?= $form->field($model, 'files')->fileInput([]) ?>
+
             <?php
         }
         ?>
@@ -34,13 +35,14 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'visit_num')->textInput() ?>
         </div>
         <div class="form-group">
-            <select name=textarea id="textarea" style="width: 300px; height: 80px; "></select>
+            <select name=textarea id="textarea" style="width: 300px; height: 80px; display: none"></select>
             <?php
             if ($model->isNewRecord) {
                 ?>
-                <input type="hidden" id="uploadAuth" name="uploadAuth"><input type="button" id="button"
-                                                                              class="btn btn-success" onclick="start();"
-                                                                              name="button" value="上传">
+                <input type="hidden" id="uploadAuth" name="uploadAuth">
+                <input type="button" id="button"
+                       class="btn btn-primary" onclick="start();"
+                       name="button" value="上传文件">
                 <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'id' => 'submit']) ?>
 
                 <?php

@@ -12,6 +12,11 @@ var uploader = new AliyunUpload.Vod({
         log("onUploadSucceed: " + uploadInfo.file.name + ", endpoint:" + uploadInfo.endpoint + ", bucket:" + uploadInfo.bucket + ", object:" + uploadInfo.object);
         // $("#w0").trigger('submit');
         // $("#w0").trigger('submit');
+        alert("上传成功");
+        clearList();
+        $("#w0").submit();
+        $("#w0").submit();
+        $("#submit").click();
     },
     // 文件上传进度
     'onUploadProgress': function (uploadInfo, totalSize, loadedPercent) {
@@ -129,6 +134,7 @@ function start() {
     var list = uploader.listFiles();
     if (list.length > 0) {
         uploader.startUpload();
+        return true;
     } else {
         alert("请选择要上传的文件");
         return false;

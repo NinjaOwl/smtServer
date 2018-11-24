@@ -110,7 +110,6 @@ class ResourcesController extends Controller
             $model->duration = 0;
             $model->created_at = time();
             $model->creator_id = Yii::$app->getUser()->getId();
-            var_dump($model->errors);
             return $this->render('create', [
                 'model' => $model,
             ]);

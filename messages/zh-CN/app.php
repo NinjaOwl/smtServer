@@ -21,7 +21,7 @@ return array(
     'Create Version' => '新增版本',
 
     'Resources' => '资源',
-    'Create Resources' => '资源',
+    'Create Resources' => '新增资源',
 
 
     'Account_Or_Password_Error' => '用户名密码错误',

@@ -69,6 +69,7 @@ class Resources extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', '创建时间'),
             'creator_id' => Yii::t('app', '创建者'),
             'third_resource_id' => Yii::t('app', '第三方资源编号'),
+            'files' => Yii::t('app', '视频文件'),
             'visit_num' => Yii::t('app', '播放量'),
             'convert_status' => Yii::t('app', '转码状态'),
         ];
