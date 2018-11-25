@@ -1,6 +1,8 @@
 <?php
 
+use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -24,23 +26,55 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'name',
-            'desc',
-            'suffix',
-            'thumb:image',
-            [
-                'attribute' => 'size',
-                'format' => 'raw',
-                'value' => \app\tools\OutFormat::formatSize($model->size),
+    <div class="panel panel-default panel-info">
+        <div class="panel-heading ">资源信息</div>
+        <div class="panel-body">
+        <?= DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                'name',
+                'desc',
+                [
+                    'attribute' => 'thumb',
+                    'avatar:image',
+                    'format' => ['image', ['width' => '100', 'height' => '100', 'title' => $model->name]],
+                    'value' => \app\tools\OutFormat::formatImage($model->thumb)
+                ],
+                [
+                    'attribute' => 'size',
+                    'format' => 'raw',
+                    'value' => \app\tools\OutFormat::formatSize($model->size),
+                ],
+                'duration',
+                'url:url',
+                'created_at:datetime',
             ],
-            'duration',
-            'url:url',
-            'created_at:datetime',
-        ],
-    ]) ?>
+        ]) ?>
+            </div>
+        </div>
+
+    <div class="panel panel-default panel-info">
+        <div class="panel-heading "> <a style="float: right" href="<?php echo Url::toRoute(['attachment/create', 'rid' => $model->id]); ?>">添加资料</a>相关资料</div>
+        <div class="panel-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+
+                    'id',
+//                    'rid',
+                    'name',
+                    'desc',
+//                    'suffix',
+                    // 'size',
+                     'url:url',
+                    // 'created_at',
+                    // 'creator_id',
+
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+        </div>
+    </div>
 
 </div>

@@ -7,7 +7,8 @@ use yii\helpers\Html;
 /* @var $model app\models\Attachment */
 
 $this->title = Yii::t('app', 'Create Attachment');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Attachments'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Attachments'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['resources/view', 'id' => $model->rid]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="attachment-create">

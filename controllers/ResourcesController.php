@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Attachment;
+use app\models\AttachmentSearch;
 use app\models\ResourcesFactory;
 use app\services\auth\FactoryResService;
 use app\tools\OutFormat;
@@ -90,9 +92,12 @@ class ResourcesController extends Controller
                 $model = $this->findModel($id);
             }
         }
+        $searchModel = new AttachmentSearch();
+        $dataProvider = $searchModel->search(["rid"=>$id]);
+//        $attachmentList = Attachment::find()->where("rid=:rid", [":rid"=>$id])->all();
 
         return $this->render('view', [
-            'model' => $model,
+            'model' => $model,'dataProvider'=>$dataProvider
         ]);
     }
 

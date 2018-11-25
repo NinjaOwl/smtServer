@@ -7,7 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Attachment */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Attachments'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Resources'), 'url' => ['resources/view?id='.$model->rid]];
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Attachments'), 'url' => ['index?rid='.$model->rid]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="attachment-view">
@@ -35,8 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'suffix',
             'size',
             'url:url',
-            'created_at',
-            'creator_id',
+            'created_at:datetime',
         ],
     ]) ?>
 

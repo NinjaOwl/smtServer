@@ -19,6 +19,22 @@ use Yii;
  */
 class Attachment extends \yii\db\ActiveRecord
 {
+    public $urlUpload;
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'avatarUpload' => [
+                'class' => 'trntv\filekit\behaviors\UploadBehavior',
+                'filesStorage' => 'fileStorage', // my custom fileStorage from configuration(for properly remove the file from disk)
+                'attribute' => 'urlUpload',
+                'pathAttribute' => 'url',
+                'sizeAttribute' => 'file_size',
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -38,6 +54,7 @@ class Attachment extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 50],
             [['desc', 'url'], 'string', 'max' => 255],
             [['suffix'], 'string', 'max' => 8],
+            [['urlUpload'],'safe']
         ];
     }
 
@@ -56,6 +73,7 @@ class Attachment extends \yii\db\ActiveRecord
             'url' => Yii::t('app', '文件路径'),
             'created_at' => Yii::t('app', '创建时间'),
             'creator_id' => Yii::t('app', '创建者'),
+            'urlUpload' => Yii::t('app', '请选择要上传的文件'),
         ];
     }
 

@@ -9,6 +9,7 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Attachments');
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Resources'), 'url' => ['resource/view?id='.$rid]];
 ?>
 <div class="attachment-index">
 
