@@ -31,7 +31,7 @@ class Attachment extends \yii\db\ActiveRecord
                 'filesStorage' => 'fileStorage', // my custom fileStorage from configuration(for properly remove the file from disk)
                 'attribute' => 'urlUpload',
                 'pathAttribute' => 'url',
-                'sizeAttribute' => 'file_size',
+                'sizeAttribute' => 'size',
             ],
         ];
     }
