@@ -29,32 +29,34 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="panel panel-default panel-info">
         <div class="panel-heading ">资源信息</div>
         <div class="panel-body">
-        <?= DetailView::widget([
-            'model' => $model,
-            'attributes' => [
-                'name',
-                'desc',
-                [
-                    'attribute' => 'thumb',
-                    'avatar:image',
-                    'format' => ['image', ['width' => '100', 'height' => '100', 'title' => $model->name]],
-                    'value' => \app\tools\OutFormat::formatImage($model->thumb)
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'name',
+                    'desc',
+                    [
+                        'attribute' => 'thumb',
+                        'avatar:image',
+                        'format' => ['image', ['width' => '100', 'height' => '100', 'title' => $model->name]],
+                        'value' => \app\tools\OutFormat::formatImage($model->thumb)
+                    ],
+                    [
+                        'attribute' => 'size',
+                        'format' => 'raw',
+                        'value' => \app\tools\OutFormat::formatSize($model->size),
+                    ],
+                    'duration',
+                    'url:url',
+                    'created_at:datetime',
                 ],
-                [
-                    'attribute' => 'size',
-                    'format' => 'raw',
-                    'value' => \app\tools\OutFormat::formatSize($model->size),
-                ],
-                'duration',
-                'url:url',
-                'created_at:datetime',
-            ],
-        ]) ?>
-            </div>
+            ]) ?>
         </div>
+    </div>
 
     <div class="panel panel-default panel-info">
-        <div class="panel-heading "> <a style="float: right" href="<?php echo Url::toRoute(['attachment/create', 'rid' => $model->id]); ?>">添加资料</a>相关资料</div>
+        <div class="panel-heading "><a style="float: right"
+                                       href="<?php echo Url::toRoute(['attachment/create', 'rid' => $model->id]); ?>">添加资料</a>相关资料
+        </div>
         <div class="panel-body">
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -70,8 +72,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'url',
                         'format' => 'url',
-                        'value' => function($data){
-                           return \app\tools\OutFormat::formatImage($data->url);
+                        'value' => function ($data) {
+                            return \app\tools\OutFormat::formatImage($data->url);
                         },
                     ],
                     // 'created_at',
@@ -80,12 +82,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\ActionColumn', 'header' => '操作', 'template' => ' {update} {delete}',
                         'buttons' => [
                             'update' => function ($url, $model) {
-                                $url = Url::to("/attachment/update/".$model->id);
-                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['title' => '编辑', 'target' => '_blank']);
+                                $url = Url::to("/attachment/update/" . $model->id);
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['title' => '编辑', 'target' => '_blank', 'data-pjax' => '0']);
                             },
                             'delete' => function ($url, $model) {
-                                $url = Url::to("/attachment/delete/".$model->id);
-                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, ['title' => '删除', 'target' => '_blank', 'data-method'=>'post', 'data-confirm'=>'您确定要删除此项吗？','aria-label'=>'删除','data-pjax'=>'0']);
+                                $url = Url::to("/attachment/delete/" . $model->id);
+                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, ['title' => '删除', 'target' => '_blank', 'data-method' => 'post', 'data-confirm' => '您确定要删除此项吗？', 'aria-label' => '删除', 'data-pjax' => '0']);
                             },
                         ],
                         'headerOptions' => ['width' => '70']

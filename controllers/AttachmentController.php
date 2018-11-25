@@ -115,7 +115,7 @@ class AttachmentController extends Controller
         $model = new Attachment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/resources/view', 'id' => $model->rid]);
         } else {
             $model->created_at = time();
             $model->creator_id = Yii::$app->getUser()->getId();
@@ -138,7 +138,7 @@ class AttachmentController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/resources/view', 'id' => $model->rid]);
         } else {
             return $this->render('update', [
                 'model' => $model,
