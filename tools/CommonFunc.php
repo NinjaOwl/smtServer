@@ -37,6 +37,22 @@ class CommonFunc
     }
 
     /**
+     * 获取工厂map
+     * @return array
+     */
+    public static function getFactoryListMap()
+    {
+        $list = self::getFactoryList();
+        $map = [];
+        if (empty($list) == false) {
+            foreach ($list as $rec) {
+                $map[$rec['id']] = $rec['label'];
+            }
+        }
+        return $map;
+    }
+
+    /**
      * 特殊处理
      * @param $cls
      * @param $exceptLabels

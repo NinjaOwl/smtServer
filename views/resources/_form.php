@@ -22,6 +22,7 @@ use yii\widgets\ActiveForm;
             <?php
         }
         ?>
+        <?= $form->field($model, 'factory_ids')->checkboxList(\app\tools\CommonFunc::getFactoryListMap()) ?>
         <div style="display: none;">
             <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'thumb')->textInput(['maxlength' => true]) ?>

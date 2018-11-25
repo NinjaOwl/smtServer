@@ -26,6 +26,8 @@ class Resources extends \yii\db\ActiveRecord
     const CONVERT_STATUS_CONVERTING = 'converting';
     const CONVERT_STATUS_FISHING = 'converted';
     public $files;
+    public $factory_ids;
+
     /**
      * @inheritdoc
      */
@@ -47,7 +49,7 @@ class Resources extends \yii\db\ActiveRecord
             [['suffix'], 'string', 'max' => 8],
             [['convert_status'], 'string', 'max' => 10],
             [['third_resource_id'], 'string', 'max' => 32],
-            [['files'], 'safe']
+            [['files', 'factory_ids'], 'safe']
         ];
     }
 
@@ -72,6 +74,7 @@ class Resources extends \yii\db\ActiveRecord
             'files' => Yii::t('app', '视频文件'),
             'visit_num' => Yii::t('app', '播放量'),
             'convert_status' => Yii::t('app', '转码状态'),
+            'factory_ids' => Yii::t('app', '所属工厂'),
         ];
     }
 }

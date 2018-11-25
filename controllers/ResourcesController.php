@@ -2,12 +2,15 @@
 
 namespace app\controllers;
 
+use app\models\ResourcesFactory;
+use app\services\auth\FactoryResService;
 use app\tools\OutFormat;
 use app\tools\OutTools;
 use app\tools\VodTools;
 use Yii;
 use app\models\Resources;
 use app\models\ResourcesSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -87,6 +90,7 @@ class ResourcesController extends Controller
                 $model = $this->findModel($id);
             }
         }
+
         return $this->render('view', [
             'model' => $model,
         ]);
@@ -102,6 +106,10 @@ class ResourcesController extends Controller
         $model = new Resources();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if (empty($model->factory_ids) == false) {
+                $service = new FactoryResService();
+                $service->addBatch($model->id, $model->factory_ids);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             $model->size = 0;
@@ -125,10 +133,13 @@ class ResourcesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $service = new FactoryResService();
+            $service->updateBatch($model->id, $model->factory_ids);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $service = new FactoryResService();
+            $model->factory_ids = $service->getFactoryIdArray($model->id);
             return $this->render('update', [
                 'model' => $model,
             ]);

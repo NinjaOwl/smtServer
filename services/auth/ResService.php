@@ -13,6 +13,7 @@ use app\format\FormatPaging;
 use app\format\FormatRes;
 use app\format\FormatResList;
 use app\models\Resources;
+use app\models\ResourcesFactory;
 use app\tools\ErrorCode;
 use app\tools\OutTools;
 
@@ -31,9 +32,19 @@ class ResService
         $condition = "1=1";
         $param = [];
         if (empty($factoryId) == false) {
-            $condition .= " and fid=:factory_id";
+            $condition .= " and rf.factory_id=:factory_id";
             $param[":factory_id"] = $factoryId;
-        }else{
+            if (empty($resName) == false) {
+                $condition .= " and r.name like :name";
+                $param[":name"] = "%" . $resName . "%";
+            }
+            $totalCount = Resources::find()->alias("r")->leftJoin(ResourcesFactory::tableName() . " as rf", 'r.id=rf.resource_id')->where($condition, $param)->count();
+            $offset = ($page - 1) * $max;
+            $array = Resources::find()->alias("r")->leftJoin(ResourcesFactory::tableName() . " as rf", 'r.id=rf.resource_id')->where($condition, $param)->asArray()->offset($offset)->limit($max)->all();
+
+            return OutTools::success(array('list' => FormatResList::format($array), 'paging' => FormatPaging::format($totalCount, $max, $page)));
+
+        } else {
             if (empty($resName) == false) {
                 $condition .= " and name like :name";
                 $param[":name"] = "%" . $resName . "%";
@@ -44,7 +55,7 @@ class ResService
 
             return OutTools::success(array('list' => FormatResList::format($array), 'paging' => FormatPaging::format($totalCount, $max, $page)));
         }
-        
+
     }
 
     /**

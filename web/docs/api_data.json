@@ -116,6 +116,13 @@
             "group": "Success 200",
             "type": "string",
             "optional": false,
+            "field": "data.version.file_size",
+            "description": "<p>文件大小</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
             "field": "data.version.is_force",
             "description": "<p>是否强制</p>"
           }
