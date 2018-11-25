@@ -18,8 +18,8 @@ class AttachmentSearch extends Attachment
     public function rules()
     {
         return [
-            [['id', 'rid', 'size', 'createTime'], 'integer'],
-            [['name', 'desc', 'suffix', 'url', 'createUser'], 'safe'],
+            [['id', 'rid', 'size', 'created_at', 'creator_id'], 'integer'],
+            [['name', 'desc', 'suffix', 'url'], 'safe'],
         ];
     }
 
@@ -62,14 +62,14 @@ class AttachmentSearch extends Attachment
             'id' => $this->id,
             'rid' => $this->rid,
             'size' => $this->size,
-            'createTime' => $this->createTime,
+            'created_at' => $this->created_at,
+            'creator_id' => $this->creator_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'desc', $this->desc])
             ->andFilterWhere(['like', 'suffix', $this->suffix])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'createUser', $this->createUser]);
+            ->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;
     }

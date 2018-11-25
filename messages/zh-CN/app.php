@@ -23,6 +23,9 @@ return array(
     'Resources' => '资源',
     'Create Resources' => '新增资源',
 
+    'Attachment'=>'附件',
+    'Attachments'=>'附件列表',
+    'Create Attachment'=>'附件',
 
     'Account_Or_Password_Error' => '用户名密码错误',
     'User' => '用户',

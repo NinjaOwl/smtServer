@@ -14,8 +14,8 @@ use Yii;
  * @property string $suffix
  * @property integer $size
  * @property string $url
- * @property integer $createTime
- * @property string $createUser
+ * @property integer $created_at
+ * @property integer $creator_id
  */
 class Attachment extends \yii\db\ActiveRecord
 {
@@ -34,8 +34,8 @@ class Attachment extends \yii\db\ActiveRecord
     {
         return [
             [['rid'], 'required'],
-            [['rid', 'size', 'createTime'], 'integer'],
-            [['name', 'createUser'], 'string', 'max' => 50],
+            [['rid', 'size', 'created_at', 'creator_id'], 'integer'],
+            [['name'], 'string', 'max' => 50],
             [['desc', 'url'], 'string', 'max' => 255],
             [['suffix'], 'string', 'max' => 8],
         ];
@@ -47,15 +47,24 @@ class Attachment extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'rid' => 'Rid',
-            'name' => 'Name',
-            'desc' => 'Desc',
-            'suffix' => 'Suffix',
-            'size' => 'Size',
-            'url' => 'Url',
-            'createTime' => 'Create Time',
-            'createUser' => 'Create User',
+            'id' => Yii::t('app', 'ID'),
+            'rid' => Yii::t('app', '资源id'),
+            'name' => Yii::t('app', '名称'),
+            'desc' => Yii::t('app', '资源描述'),
+            'suffix' => Yii::t('app', '文件后缀'),
+            'size' => Yii::t('app', '文件大小(kb)'),
+            'url' => Yii::t('app', '文件路径'),
+            'created_at' => Yii::t('app', '创建时间'),
+            'creator_id' => Yii::t('app', '创建者'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     * @return AttachmentQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new AttachmentQuery(get_called_class());
     }
 }
