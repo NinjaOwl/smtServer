@@ -67,11 +67,29 @@ $this->params['breadcrumbs'][] = $this->title;
                     'desc',
 //                    'suffix',
                     // 'size',
-                     'url:url',
+                    [
+                        'attribute' => 'url',
+                        'format' => 'url',
+                        'value' => function($data){
+                           return \app\tools\OutFormat::formatImage($data->url);
+                        },
+                    ],
                     // 'created_at',
                     // 'creator_id',
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    ['class' => 'yii\grid\ActionColumn', 'header' => '操作', 'template' => ' {update} {delete}',
+                        'buttons' => [
+                            'update' => function ($url, $model) {
+                                $url = Url::to("/attachment/update/".$model->id);
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['title' => '编辑', 'target' => '_blank']);
+                            },
+                            'delete' => function ($url, $model) {
+                                $url = Url::to("/attachment/delete/".$model->id);
+                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, ['title' => '删除', 'target' => '_blank', 'data-method'=>'post', 'data-confirm'=>'您确定要删除此项吗？','aria-label'=>'删除','data-pjax'=>'0']);
+                            },
+                        ],
+                        'headerOptions' => ['width' => '70']
+                    ],
                 ],
             ]); ?>
         </div>

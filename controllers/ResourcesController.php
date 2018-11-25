@@ -92,12 +92,10 @@ class ResourcesController extends Controller
                 $model = $this->findModel($id);
             }
         }
-        $searchModel = new AttachmentSearch();
-        $dataProvider = $searchModel->search(["rid"=>$id]);
-//        $attachmentList = Attachment::find()->where("rid=:rid", [":rid"=>$id])->all();
-
+        $searchModel = new AttachmentSearch(["rid"=>(int)$id]);
+        $dataProvider = $searchModel->search(["rid"=>(int)$id]);
         return $this->render('view', [
-            'model' => $model,'dataProvider'=>$dataProvider
+            'model' => $model,'dataProvider'=>$dataProvider,'searchModel'=>$searchModel
         ]);
     }
 
