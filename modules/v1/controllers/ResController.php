@@ -38,6 +38,9 @@ class ResController extends Controller
      * @apiHeader {String} app_version
      * @apiParam {String} factory_id  工厂编号
      * @apiParam {String} res_name  资源名称
+     * @apiParam {String} max  每页显示条数
+     * @apiParam {String} page  页码
+     *
      * @apiSampleRequest /v1/res/list
      * @apiHeaderExample {string} Header-Example:
      *     {

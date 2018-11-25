@@ -925,6 +925,20 @@ define({ "api": [
             "optional": false,
             "field": "res_name",
             "description": "<p>资源名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "max",
+            "description": "<p>每页显示条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页码</p>"
           }
         ]
       }
