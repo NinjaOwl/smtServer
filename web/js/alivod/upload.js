@@ -15,7 +15,7 @@ var uploader = new AliyunUpload.Vod({
         alert("上传成功");
         clearList();
         $("#w0").submit();
-        $("#uploadBtn").hide();
+        $("#uploadBtn").prop('disabled', true);
         $("#submit").prop('disabled',false);
     },
     // 文件上传进度
@@ -117,6 +117,7 @@ var selectFile = function (event) {
         log("add file: " + event.target.files[i].name);
         uploader.addFile(event.target.files[i], null, null, null, userData);
     }
+    $("#uploadBtn").prop('disabled', false);
 };
 
 document.getElementById("resources-files")
