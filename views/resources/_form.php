@@ -40,10 +40,10 @@ use yii\widgets\ActiveForm;
             if ($model->isNewRecord) {
                 ?>
                 <input type="hidden" id="uploadAuth" name="uploadAuth">
-                <input type="button" id="button"
+                <input type="button" id="uploadBtn"
                        class="btn btn-primary" onclick="start();"
                        name="button" value="上传文件">
-                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'id' => 'submit']) ?>
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'id' => 'submit', 'disabled'=>'true']) ?>
 
                 <?php
             } else {

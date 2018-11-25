@@ -15,8 +15,8 @@ var uploader = new AliyunUpload.Vod({
         alert("上传成功");
         clearList();
         $("#w0").submit();
-        $("#w0").submit();
-        $("#submit").click();
+        $("#uploadBtn").hide();
+        $("#submit").prop('disabled',false);
     },
     // 文件上传进度
     'onUploadProgress': function (uploadInfo, totalSize, loadedPercent) {
@@ -106,7 +106,7 @@ var getCheckpoint = function () {
             log(list[i].file.name + ' no checkpoint.');
         }
     }
-}
+};
 
 // 点播上传。每次上传都是独立的鉴权，所以初始化时，不需要设置鉴权
 // 临时账号过期时，在onUploadTokenExpired事件中，用resumeWithToken更新临时账号，上传会续传。
@@ -229,4 +229,3 @@ function log(value) {
 function isVodMode() {
     return true;
 }
-

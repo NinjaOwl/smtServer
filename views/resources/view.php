@@ -28,12 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'name',
             'desc',
             'suffix',
-            'thumb',
-            'size',
+            'thumb:image',
+            [
+                'attribute' => 'size',
+                'format' => 'raw',
+                'value' => \app\tools\OutFormat::formatSize($model->size),
+            ],
             'duration',
             'url:url',
             'created_at:datetime',
