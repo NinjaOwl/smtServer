@@ -70,7 +70,7 @@ class ResourcesSearch extends Resources
             ->andFilterWhere(['like', 'suffix', $this->suffix])
             ->andFilterWhere(['like', 'thumb', $this->thumb])
             ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'creator_id', $this->creator_id]);
+            ->andFilterWhere(['like', 'creator_id', $this->creator_id])->orderBy("created_at desc");
 
         return $dataProvider;
     }

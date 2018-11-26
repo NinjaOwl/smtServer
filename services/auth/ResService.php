@@ -42,7 +42,7 @@ class ResService
             }
             $totalCount = Resources::find()->alias("r")->leftJoin(ResourcesFactory::tableName() . " as rf", 'r.id=rf.resource_id')->where($condition, $param)->count();
             $offset = ($page - 1) * $max;
-            $array = Resources::find()->alias("r")->leftJoin(ResourcesFactory::tableName() . " as rf", 'r.id=rf.resource_id')->where($condition, $param)->asArray()->offset($offset)->limit($max)->all();
+            $array = Resources::find()->alias("r")->leftJoin(ResourcesFactory::tableName() . " as rf", 'r.id=rf.resource_id')->where($condition, $param)->asArray()->offset($offset)->limit($max)->orderBy("r.created_at desc")->all();
 
             return OutTools::success(array('list' => FormatResList::format($array), 'paging' => FormatPaging::format($totalCount, $max, $page)));
 
@@ -53,7 +53,7 @@ class ResService
             }
             $totalCount = Resources::find()->where($condition, $param)->count();
             $offset = ($page - 1) * $max;
-            $array = Resources::find()->where($condition, $param)->asArray()->offset($offset)->limit($max)->all();
+            $array = Resources::find()->where($condition, $param)->asArray()->offset($offset)->limit($max)->orderBy("created_at desc")->all();
 
             return OutTools::success(array('list' => FormatResList::format($array), 'paging' => FormatPaging::format($totalCount, $max, $page)));
         }
