@@ -72,7 +72,7 @@ class UserController extends Controller
         } else {
             $model->created_at = time();
             $model->updated_at = time();
-            $model->status = 1;
+            $model->status = 10;
             $model->factory_id = 0;
             $userAuth = new UserAuth();
             $userAuth->generateAuthKey();
