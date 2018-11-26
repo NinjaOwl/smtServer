@@ -59,6 +59,7 @@ class ResController extends Controller
      * @apiSuccess {string} data.list.res_suffix 文件后缀
      * @apiSuccess {string} data.list.res_thumb 缩略图
      * @apiSuccess {string} data.list.res_url 资源访问地址
+     * @apiSuccess {string} data.list.res_date 上传时间
      * @apiSuccessExample {json} 正确实例:
      *
      * {
@@ -128,12 +129,14 @@ class ResController extends Controller
      * @apiSuccess {string} data.res.res_suffix 文件后缀
      * @apiSuccess {string} data.res.res_thumb 缩略图
      * @apiSuccess {string} data.res.res_url 资源访问地址
+     * @apiSuccess {string} data.res.res_date 上传时间
      * @apiSuccess {json[]} data.attachments
      * @apiSuccess {int} data.attachments.attach_id 资料编号
      * @apiSuccess {int} data.attachments.attach_name 资料名称
      * @apiSuccess {int} data.attachments.attach_desc 资料描述
      * @apiSuccess {int} data.attachments.attach_suffix 资料后缀
      * @apiSuccess {int} data.attachments.attach_url 资料下载地址
+     * @apiSuccess {int} data.attachments.attach_date 资料上传时间
      * @apiSuccessExample {json} 正确实例:
      *
      * {

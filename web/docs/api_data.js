@@ -822,6 +822,13 @@ define({ "api": [
           },
           {
             "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "data.res.res_date",
+            "description": "<p>上传时间</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "json[]",
             "optional": false,
             "field": "data.attachments",
@@ -861,6 +868,13 @@ define({ "api": [
             "optional": false,
             "field": "data.attachments.attach_url",
             "description": "<p>资料下载地址</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "data.attachments.attach_date",
+            "description": "<p>资料上传时间</p>"
           }
         ]
       },
@@ -1062,6 +1076,13 @@ define({ "api": [
             "optional": false,
             "field": "data.list.res_url",
             "description": "<p>资源访问地址</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "data.list.res_date",
+            "description": "<p>上传时间</p>"
           }
         ]
       },

@@ -9,6 +9,8 @@
 namespace app\format;
 
 
+use app\tools\OutFormat;
+
 class FormatRes
 {
     public static function format($data)
@@ -21,6 +23,7 @@ class FormatRes
             $newData['res_suffix'] = $data['suffix'];
             $newData['res_thumb'] = $data['thumb'];
             $newData['res_url'] = $data['url'];
+            $newData['res_date'] = date('Y.m.d H:i:s', $data['created_at']);
         }
         return $newData;
     }

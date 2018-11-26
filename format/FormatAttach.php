@@ -25,6 +25,7 @@ class FormatAttach
                 $newData['attach_desc'] = $data['desc'];
                 $newData['attach_suffix'] = $data['suffix'];
                 $newData['attach_url'] = OutFormat::formatImage($data['url']);
+                $newData['attach_date'] = date('Y.m.d H:i:s', $data['created_at']);
                 $newDataList[] = $newData;
             }
         }
