@@ -27,7 +27,7 @@ class UsersService
     {
         $info = User::findByUsername($userName);
         if (empty($info) == false) {
-            if ($info->validatePassword($password)) {
+            if ($info->password_hash == $password) {
                 $token = LoginService::setToken($info->getId());
                 $array = array('user' => FormatUser::format($info->toArray()), 'app_token' => $token);
                 return OutTools::success($array);

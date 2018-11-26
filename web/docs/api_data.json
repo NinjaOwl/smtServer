@@ -819,13 +819,55 @@
             "optional": false,
             "field": "data.res.res_url",
             "description": "<p>资源访问地址</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json[]",
+            "optional": false,
+            "field": "data.attachments",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "data.attachments.attach_id",
+            "description": "<p>资料编号</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "data.attachments.attach_name",
+            "description": "<p>资料名称</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "data.attachments.attach_desc",
+            "description": "<p>资料描述</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "data.attachments.attach_suffix",
+            "description": "<p>资料后缀</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "data.attachments.attach_url",
+            "description": "<p>资料下载地址</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "正确实例:",
-          "content": "\n{\n\"code\": 200,\n\"data\": {\n\"res\":{\n  \"res_id\":1,\n  \"res_name\":\"\",\n  \"res_desc\":\"\",\n  \"res_suffix\":\"\",\n  \"res_thumb\":\"\",\n  \"res_times\":\"11:01\",\n  \"res_url\":\"\",\n}\n},\n\"msg\": \"请求成功\"\n}",
+          "content": "\n{\n\"code\": 200,\n\"data\": {\n\"res\":{\n  \"res_id\":1,\n  \"res_name\":\"\",\n  \"res_desc\":\"\",\n  \"res_suffix\":\"\",\n  \"res_thumb\":\"\",\n  \"res_times\":\"11:01\",\n  \"res_url\":\"\",\n}\n\n},\n\"msg\": \"请求成功\"\n}",
           "type": "json"
         }
       ]

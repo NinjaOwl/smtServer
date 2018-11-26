@@ -14,12 +14,14 @@ use Yii;
  * @property string $suffix
  * @property integer $size
  * @property string $url
+ * @property string $file_name
  * @property integer $created_at
  * @property integer $creator_id
  */
 class Attachment extends \yii\db\ActiveRecord
 {
     public $urlUpload;
+
     /**
      * @inheritdoc
      */
@@ -31,10 +33,21 @@ class Attachment extends \yii\db\ActiveRecord
                 'filesStorage' => 'fileStorage', // my custom fileStorage from configuration(for properly remove the file from disk)
                 'attribute' => 'urlUpload',
                 'pathAttribute' => 'url',
+                'nameAttribute' => 'file_name',
                 'sizeAttribute' => 'size',
             ],
         ];
     }
+
+    public function beforeSave($insert)
+    {
+        if (empty($this->file_name) == false) {
+            $arr = pathinfo($this->file_name);
+            $this->suffix = $arr['extension'];
+        }
+        return true;
+    }
+
     /**
      * @inheritdoc
      */
@@ -54,7 +67,8 @@ class Attachment extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 50],
             [['desc', 'url'], 'string', 'max' => 255],
             [['suffix'], 'string', 'max' => 8],
-            [['urlUpload'],'safe']
+            [['file_name'], 'string', 'max' => 100],
+            [['urlUpload'], 'safe']
         ];
     }
 
@@ -71,6 +85,7 @@ class Attachment extends \yii\db\ActiveRecord
             'suffix' => Yii::t('app', '文件后缀'),
             'size' => Yii::t('app', '文件大小(kb)'),
             'url' => Yii::t('app', '文件路径'),
+            'file_name' => Yii::t('app', '文件名'),
             'created_at' => Yii::t('app', '创建时间'),
             'creator_id' => Yii::t('app', '创建者'),
             'urlUpload' => Yii::t('app', '请选择要上传的文件'),

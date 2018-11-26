@@ -74,7 +74,7 @@ class UserAuth extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function setPassword($password)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->password_hash = md5($password);
     }
 
     /**
@@ -149,6 +149,8 @@ class UserAuth extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
+//        return Yii::$app->security->validatePassword($password, $this->password_hash);r
+        return md5($password) == $this->password_hash;
+//        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 }

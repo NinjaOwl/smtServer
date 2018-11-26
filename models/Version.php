@@ -11,6 +11,7 @@ use Yii;
  * @property string $version_code
  * @property string $version_content
  * @property string $download_url
+ * @property string $file_name
  * @property string $file_size
  * @property integer $is_latest
  * @property integer $is_force
@@ -19,6 +20,7 @@ use Yii;
 class Version extends \yii\db\ActiveRecord
 {
     public $downloadUrlUpload;
+
     /**
      * @inheritdoc
      */
@@ -31,6 +33,7 @@ class Version extends \yii\db\ActiveRecord
                 'attribute' => 'downloadUrlUpload',
                 'pathAttribute' => 'download_url',
                 'sizeAttribute' => 'file_size',
+                'nameAttribute' => 'file_name',
             ],
         ];
     }
@@ -54,8 +57,8 @@ class Version extends \yii\db\ActiveRecord
             [['version_code'], 'string', 'max' => 20],
             [['file_size'], 'string', 'max' => 10],
             [['version_content'], 'string', 'max' => 500],
-            [['download_url'], 'string', 'max' => 100],
-            [['downloadUrlUpload'],'safe']
+            [['download_url', 'file_name'], 'string', 'max' => 100],
+            [['downloadUrlUpload'], 'safe']
         ];
     }
 

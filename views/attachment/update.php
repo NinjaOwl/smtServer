@@ -6,10 +6,10 @@ use yii\helpers\Html;
 /* @var $model app\models\Attachment */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Attachment',
+    'modelClass' => Yii::t('app', 'Attachment'),
 ]) . $model->name;
 //$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Attachments'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['resources/view', 'id' => $model->rid]];
+$this->params['breadcrumbs'][] = ['label' =>Yii::t('app', 'Resources'), 'url' => ['resources/view', 'id' => $model->rid]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="attachment-update">

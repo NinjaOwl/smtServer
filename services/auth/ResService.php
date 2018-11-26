@@ -9,9 +9,11 @@
 namespace app\services\auth;
 
 
+use app\format\FormatAttach;
 use app\format\FormatPaging;
 use app\format\FormatRes;
 use app\format\FormatResList;
+use app\models\Attachment;
 use app\models\Resources;
 use app\models\ResourcesFactory;
 use app\tools\ErrorCode;
@@ -67,7 +69,8 @@ class ResService
     {
         $array = Resources::findOne($resId);
         if (empty($array) == false) {
-            return OutTools::success(array('res' => FormatRes::format($array->toArray())));
+            $resourcesList = Attachment::find()->where("rid=:rid", array(":rid" => $resId))->asArray()->all();
+            return OutTools::success(array('res' => FormatRes::format($array->toArray()), 'attachments' => FormatAttach::format($resourcesList)));
         } else {
             return OutTools::error(ErrorCode::ERROR, \Yii::t('app', 'Not_Found', [\Yii::t('app', 'Res')]));
         }
