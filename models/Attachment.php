@@ -39,6 +39,15 @@ class Attachment extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if (empty($this->file_name) == false) {
+            $arr = pathinfo($this->file_name);
+            $this->suffix = $arr['extension'];
+        }
+        return true;
+    }
+
     /**
      * @inheritdoc
      */
