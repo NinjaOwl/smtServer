@@ -79,23 +79,28 @@ class ResourcesController extends Controller
         //获取视频信息
         if ($model->convert_status == Resources::CONVERT_STATUS_CONVERTING) {
             $vodtools = new VodTools();
-            $info = $vodtools->get_play_info($model->third_resource_id);
-            $data = array();
-            if ($info['VideoBase']['Status'] == 'Normal') {
-                $data['duration'] = $info['PlayInfoList']['PlayInfo'][1]['Duration'];
-                $data['url'] = $info['PlayInfoList']['PlayInfo'][1]['PlayURL'];
-                $data['size'] = $info['PlayInfoList']['PlayInfo'][1]['Size'];
-                $data['thumb'] = $info['VideoBase']['CoverURL'];
-                $data['convert_status'] = Resources::CONVERT_STATUS_FISHING;
-                $data['suffix'] = $info['PlayInfoList']['PlayInfo'][1]['Format'];
-                Resources::updateAll($data, 'id=:id', array(':id' => $id));
-                $model = $this->findModel($id);
+            try {
+                $info = $vodtools->get_play_info($model->third_resource_id);
+                $data = array();
+                if ($info['VideoBase']['Status'] == 'Normal') {
+                    $data['duration'] = $info['PlayInfoList']['PlayInfo'][1]['Duration'];
+                    $data['url'] = $info['PlayInfoList']['PlayInfo'][1]['PlayURL'];
+                    $data['size'] = $info['PlayInfoList']['PlayInfo'][1]['Size'];
+                    $data['thumb'] = $info['VideoBase']['CoverURL'];
+                    $data['convert_status'] = Resources::CONVERT_STATUS_FISHING;
+                    $data['suffix'] = $info['PlayInfoList']['PlayInfo'][1]['Format'];
+                    Resources::updateAll($data, 'id=:id', array(':id' => $id));
+                    $model = $this->findModel($id);
+                }
+            } catch (\Exception $e) {
+                //还在转码中
             }
+
         }
-        $searchModel = new AttachmentSearch(["rid"=>(int)$id]);
-        $dataProvider = $searchModel->search(["rid"=>(int)$id]);
+        $searchModel = new AttachmentSearch(["rid" => (int)$id]);
+        $dataProvider = $searchModel->search(["rid" => (int)$id]);
         return $this->render('view', [
-            'model' => $model,'dataProvider'=>$dataProvider,'searchModel'=>$searchModel
+            'model' => $model, 'dataProvider' => $dataProvider, 'searchModel' => $searchModel
         ]);
     }
 
