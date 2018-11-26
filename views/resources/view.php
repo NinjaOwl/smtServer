@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'thumb',
                         'avatar:image',
                         'format' => ['image', ['width' => '100', 'height' => '100', 'title' => $model->name]],
-                        'value' => \app\tools\OutFormat::formatImage($model->thumb)
+                        'value' => $model->thumb
                     ],
                     [
                         'attribute' => 'size',
@@ -72,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'url',
                         'format' => 'url',
+                        'options'=>['target'=>'blank'],
                         'value' => function ($data) {
                             return \app\tools\OutFormat::formatImage($data->url);
                         },
@@ -83,11 +84,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'buttons' => [
                             'update' => function ($url, $model) {
                                 $url = Url::to("/attachment/update/" . $model->id);
-                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['title' => '编辑', 'target' => '_blank', 'data-pjax' => '0']);
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['title' => '编辑', 'data-pjax' => '0']);
                             },
                             'delete' => function ($url, $model) {
                                 $url = Url::to("/attachment/delete/" . $model->id);
-                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, ['title' => '删除', 'target' => '_blank', 'data-method' => 'post', 'data-confirm' => '您确定要删除此项吗？', 'aria-label' => '删除', 'data-pjax' => '0']);
+                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, ['title' => '删除', 'data-method' => 'post', 'data-confirm' => '您确定要删除此项吗？', 'aria-label' => '删除', 'data-pjax' => '0']);
                             },
                         ],
                         'headerOptions' => ['width' => '70']
