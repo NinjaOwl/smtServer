@@ -9,6 +9,8 @@
 namespace app\format;
 
 
+use app\tools\OutFormat;
+
 class FormatVersion
 {
     /**
@@ -23,7 +25,7 @@ class FormatVersion
                 'version_id' => $data['id'],
                 'version_code' => $data['version_code'],
                 'version_content' => $data['version_content'],
-                'version_url' => $data['download_url'],
+                'version_url' => OutFormat::formatImage($data['download_url']),
                 'file_size' => $data['file_size'],
                 'is_force' => $data['is_force'],
             ];
