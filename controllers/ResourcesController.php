@@ -141,8 +141,11 @@ class ResourcesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->third_resource_id != $_POST['third_resource_id']) {
-            $model->convert_status = Resources::CONVERT_STATUS_CONVERTING;
+        //上传
+        if(isset($_POST['third_resource_id'])){
+            if ($model->third_resource_id != isset($_POST['third_resource_id'])) {
+                $model->convert_status = Resources::CONVERT_STATUS_CONVERTING;
+            }
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $service = new FactoryResService();
