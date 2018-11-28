@@ -122,14 +122,15 @@ class ResController extends Controller
      * @apiSuccess {String} code 200.
      * @apiSuccess {String} msg 消息
      * @apiSuccess {json} data 数据
-     * @apiSuccess {json} data.res 数据
-     * @apiSuccess {int} data.res.res_id 资源编号
-     * @apiSuccess {string} data.res.res_name 资源名称
-     * @apiSuccess {string} data.res.res_desc 资源描述
-     * @apiSuccess {string} data.res.res_suffix 文件后缀
-     * @apiSuccess {string} data.res.res_thumb 缩略图
-     * @apiSuccess {string} data.res.res_url 资源访问地址
-     * @apiSuccess {string} data.res.res_date 上传时间
+     * @apiSuccess {json} data.device 设备
+     * @apiSuccess {int} data.device.device_id 设备编号
+     * @apiSuccess {string} data.device.device_name 设备名称
+     * @apiSuccess {string} data.device.device_desc 设备描述
+     * @apiSuccess {json} data.video 视频
+     * @apiSuccess {string} data.video.video_suffix 文件后缀
+     * @apiSuccess {string} data.video.video_thumb 缩略图
+     * @apiSuccess {string} data.video.video_url 资源访问地址
+     * @apiSuccess {string} data.video.video_date 上传时间
      * @apiSuccess {json[]} data.attachments
      * @apiSuccess {int} data.attachments.attach_id 资料编号
      * @apiSuccess {int} data.attachments.attach_name 资料名称

@@ -27,29 +27,51 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
     <div class="panel panel-default panel-info">
-        <div class="panel-heading ">资源信息</div>
+        <div class="panel-heading "><?php echo Yii::t('app', 'Resources') ?>信息</div>
         <div class="panel-body">
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
                     'name',
                     'desc',
-                    [
-                        'attribute' => 'thumb',
-                        'avatar:image',
-                        'format' => ['image', ['width' => '100', 'height' => '100', 'title' => $model->name]],
-                        'value' => $model->thumb
-                    ],
-                    [
-                        'attribute' => 'size',
-                        'format' => 'raw',
-                        'value' => \app\tools\OutFormat::formatSize($model->size),
-                    ],
-                    'duration',
-                    'url:url',
-                    'created_at:datetime',
                 ],
             ]) ?>
+        </div>
+    </div>
+
+    <div class="panel panel-default panel-info">
+        <div class="panel-heading ">视频信息</div>
+        <div class="panel-body">
+            <?php
+            if (empty($model->third_resource_id) == false) {
+                ?>
+                <?= DetailView::widget([
+                    'model' => $model,
+                    'attributes' => [
+                        [
+                            'attribute' => 'thumb',
+                            'avatar:image',
+                            'format' => ['image', ['width' => '100', 'height' => '100', 'title' => $model->name]],
+                            'value' => $model->thumb
+                        ],
+                        [
+                            'attribute' => 'size',
+                            'format' => 'raw',
+                            'value' => \app\tools\OutFormat::formatSize($model->size),
+                        ],
+                        'duration',
+                        'url:url',
+                        'created_at:datetime',
+                    ],
+                ]) ?>
+                <?php
+            } else {
+                ?>
+                尚未上传视频
+                <?php
+            }
+            ?>
+
         </div>
     </div>
 
@@ -72,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'url',
                         'format' => 'url',
-                        'options'=>['target'=>'blank'],
+                        'options' => ['target' => 'blank'],
                         'value' => function ($data) {
                             return \app\tools\OutFormat::formatImage($data->url);
                         },

@@ -20,8 +20,8 @@ return array(
     'Versions' => '版本',
     'Create Version' => '新增版本',
 
-    'Resources' => '资源',
-    'Create Resources' => '新增资源',
+    'Resources' => '设备',
+    'Create Resources' => '新增设备',
 
     'Attachment'=>'附件',
     'Attachments'=>'附件列表',

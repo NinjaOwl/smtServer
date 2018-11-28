@@ -14,14 +14,7 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'desc')->textarea(['maxlength' => true]) ?>
-        <?php
-        if ($model->isNewRecord) {
-            ?>
-            <?= $form->field($model, 'files')->fileInput([]) ?>
-
-            <?php
-        }
-        ?>
+        <?= $form->field($model, 'files')->fileInput([]) ?>
         <?= $form->field($model, 'factory_ids')->checkboxList(\app\tools\CommonFunc::getFactoryListMap()) ?>
         <div style="display: none;">
             <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
@@ -44,11 +37,14 @@ use yii\widgets\ActiveForm;
                 <input type="button" id="uploadBtn"
                        class="btn btn-primary" onclick="start();"
                        name="button" value="上传文件">
-                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'id' => 'submit', 'disabled'=>'true']) ?>
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'id' => 'submit']) ?>
 
                 <?php
             } else {
                 ?>
+                <input type="button" id="uploadBtn"
+                       class="btn btn-primary" onclick="start();"
+                       name="button" value="上传文件">
                 <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                 <?php
             }

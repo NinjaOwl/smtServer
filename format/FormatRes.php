@@ -9,8 +9,6 @@
 namespace app\format;
 
 
-use app\tools\OutFormat;
-
 class FormatRes
 {
     public static function format($data)

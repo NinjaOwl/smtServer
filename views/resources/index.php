@@ -33,14 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'desc',
-            'suffix',
-            // 'thumb',
-            // 'size',
-            // 'times:datetime',
-            // 'url:url',
-            // 'createTime:datetime',
-            // 'createUser',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

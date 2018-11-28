@@ -61,7 +61,7 @@ class Resources extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', '名称'),
-            'desc' => Yii::t('app', '资源描述'),
+            'desc' => Yii::t('app', '设备描述'),
             'suffix' => Yii::t('app', '文件后缀'),
             'duration' => Yii::t('app', '时长'),
             'thumb' => Yii::t('app', '缩略图'),
