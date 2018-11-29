@@ -49,6 +49,16 @@ class OutFormat
         return '';
     }
 
+    public static function formatDate($dateStamp)
+    {
+        return date('Y-m-d H:i:s', $dateStamp);
+    }
+
+    public static function formatTimeLong($time)
+    {
+        return $time . 's';
+    }
+
     public static function formatSize($b, $times = 0)
     {
         if ($b > 1024) {

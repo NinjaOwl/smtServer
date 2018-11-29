@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'version_content',
             [
                 'attribute' => 'download_url',
-                'format' => 'url',
+                'format' => ['url', ['target' => '_blank']],
                 'value' => \app\tools\OutFormat::formatImage($model->download_url),
             ],
             [
@@ -51,7 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => \app\tools\OutFormat::formatYesNo($model->is_force),
             ],
-            'release_time:datetime',
+            [
+                'attribute' => 'release_time',
+                'format' => 'raw',
+                'value' => \app\tools\OutFormat::formatDate($model->release_time),
+            ],
         ],
     ]) ?>
 
