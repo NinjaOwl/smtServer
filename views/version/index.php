@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'version_content',
             [
                 'attribute' => 'download_url',
-                'format' => 'url',
+                'format' => ['url', ['target' => '_blank']],
                 'value' => function ($data) {
                     return \app\tools\OutFormat::formatImage($data->download_url);
                 }
@@ -62,8 +62,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return \app\tools\OutFormat::formatYesNo($data->is_force);
                 }
             ],
-            'release_time:datetime',
-
+            [
+                'attribute' => 'release_time',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    return \app\tools\OutFormat::formatDate($data->release_time);
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

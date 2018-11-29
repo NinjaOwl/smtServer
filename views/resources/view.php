@@ -59,9 +59,21 @@ $this->params['breadcrumbs'][] = $this->title;
                             'format' => 'raw',
                             'value' => \app\tools\OutFormat::formatSize($model->size),
                         ],
-                        'duration',
-                        'url:url',
-                        'created_at:datetime',
+                        [
+                            'attribute' => 'duration',
+                            'format' => 'raw',
+                            'value' => \app\tools\OutFormat::formatTimeLong($model->duration),
+                        ],
+                        [
+                            'attribute' => 'url',
+                            'format' => ['url', ['target' => '_blank']],
+                            'value' => $model->url,
+                        ],
+                        [
+                            'attribute' => 'created_at',
+                            'format' => 'raw',
+                            'value' => \app\tools\OutFormat::formatDate($model->created_at),
+                        ],
                     ],
                 ]) ?>
                 <?php
@@ -93,8 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'size',
                     [
                         'attribute' => 'url',
-                        'format' => 'url',
-                        'options' => ['target' => 'blank'],
+                        'format' => ['url', ['target' => '_blank']],
                         'value' => function ($data) {
                             return \app\tools\OutFormat::formatImage($data->url);
                         },
