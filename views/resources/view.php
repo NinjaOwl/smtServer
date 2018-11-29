@@ -44,27 +44,33 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
             <?php
             if (empty($model->third_resource_id) == false) {
-                ?>
-                <?= DetailView::widget([
-                    'model' => $model,
-                    'attributes' => [
-                        [
-                            'attribute' => 'thumb',
-                            'avatar:image',
-                            'format' => ['image', ['width' => '100', 'height' => '100', 'title' => $model->name]],
-                            'value' => $model->thumb
+                if (empty($model->url) == false) {
+                    ?>
+                    <?= DetailView::widget([
+                        'model' => $model,
+                        'attributes' => [
+                            [
+                                'attribute' => 'thumb',
+                                'avatar:image',
+                                'format' => ['image', ['width' => '100', 'height' => '100', 'title' => $model->name]],
+                                'value' => $model->thumb
+                            ],
+                            [
+                                'attribute' => 'size',
+                                'format' => 'raw',
+                                'value' => \app\tools\OutFormat::formatSize($model->size),
+                            ],
+                            'duration',
+                            'url:url',
+                            'created_at:datetime',
                         ],
-                        [
-                            'attribute' => 'size',
-                            'format' => 'raw',
-                            'value' => \app\tools\OutFormat::formatSize($model->size),
-                        ],
-                        'duration',
-                        'url:url',
-                        'created_at:datetime',
-                    ],
-                ]) ?>
-                <?php
+                    ]) ?>
+                    <?php
+                } else {
+                    ?>
+                    转码中
+                    <?php
+                }
             } else {
                 ?>
                 尚未上传视频
