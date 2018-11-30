@@ -26,15 +26,18 @@ class ResController extends Controller
                     print("third_resource_id:" . $model->third_resource_id . " at " . date("Y-m-d H:i:s") . "\n");
                     $info = $vodtools->get_play_info($model->third_resource_id);
                     $data = array();
-                    if ($info['VideoBase']['Status'] == 'Normal') {
-                        $data['duration'] = $info['PlayInfoList']['PlayInfo'][1]['Duration'];
-                        $data['url'] = $info['PlayInfoList']['PlayInfo'][1]['PlayURL'];
-                        $data['size'] = $info['PlayInfoList']['PlayInfo'][1]['Size'];
-                        $data['thumb'] = $info['VideoBase']['CoverURL'];
-                        $data['convert_status'] = Resources::CONVERT_STATUS_FISHING;
-                        $data['suffix'] = $info['PlayInfoList']['PlayInfo'][1]['Format'];
-                        print("third_resource_id:" . $model->third_resource_id . " finishing.\n");
-                        Resources::updateAll($data, 'id=:id', array(':id' => $model->id));
+                    if ("Normal" == $info['VideoBase']['Status']) {
+                        foreach ($info['PlayInfoList']['PlayInfo'] as $rec) {
+                            if ($rec['Format'] == 'mp4') {
+                                $data['duration'] = $rec['Duration'];
+                                $data['url'] = $rec['PlayURL'];
+                                $data['size'] = $rec['Size'];
+                                $data['thumb'] = $info['VideoBase']['CoverURL'];
+                                $data['convert_status'] = Resources::CONVERT_STATUS_FISHING;
+                                $data['suffix'] = $rec['Format'];
+                                Resources::updateAll($data, 'id=:id', array(':id' => $id));
+                            }
+                        }
                     }
                 } catch (\Exception $e) {
                     //还在转码中
