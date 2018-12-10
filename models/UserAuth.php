@@ -41,8 +41,6 @@ class UserAuth extends \yii\db\ActiveRecord implements IdentityInterface
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'auth_key','name'], 'string', 'max' => 32],
             [['sex', 'status', 'created_at', 'updated_at', 'factory_id'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['name', 'username', 'auth_key'], 'string', 'max' => 32],
             [['password_hash', 'password_reset_token', 'email'], 'string', 'max' => 256],
         ];
     }
