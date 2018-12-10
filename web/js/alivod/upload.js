@@ -1,6 +1,7 @@
 /**
  * Created by andy on 2018/11/22.
  */
+
 var uploader = new AliyunUpload.Vod({
     // 文件上传失败
     'onUploadFailed': function (uploadInfo, code, message) {
@@ -12,11 +13,11 @@ var uploader = new AliyunUpload.Vod({
         log("onUploadSucceed: " + uploadInfo.file.name + ", endpoint:" + uploadInfo.endpoint + ", bucket:" + uploadInfo.bucket + ", object:" + uploadInfo.object);
         // $("#w0").trigger('submit');
         // $("#w0").trigger('submit');
-        alert("上传成功");
-        clearList();
+        // alert("上传成功");
+        // clearList();
         $("#w0").submit();
-        $("#uploadBtn").prop('disabled', true);
-        $("#submit").prop('disabled',false);
+        // $("#uploadBtn").prop('disabled', true);
+        // $("#submit").prop('disabled',false);
     },
     // 文件上传进度
     'onUploadProgress': function (uploadInfo, totalSize, loadedPercent) {
@@ -137,8 +138,7 @@ function start() {
         uploader.startUpload();
         return true;
     } else {
-        alert("请选择要上传的文件");
-        return false;
+        $("#w0").submit();
     }
 
 }

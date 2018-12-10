@@ -82,14 +82,19 @@ class ResourcesController extends Controller
             try {
                 $info = $vodtools->get_play_info($model->third_resource_id);
                 $data = array();
-                if ($info['VideoBase']['Status'] == 'Normal') {
-                    $data['duration'] = $info['PlayInfoList']['PlayInfo'][1]['Duration'];
-                    $data['url'] = $info['PlayInfoList']['PlayInfo'][1]['PlayURL'];
-                    $data['size'] = $info['PlayInfoList']['PlayInfo'][1]['Size'];
-                    $data['thumb'] = $info['VideoBase']['CoverURL'];
-                    $data['convert_status'] = Resources::CONVERT_STATUS_FISHING;
-                    $data['suffix'] = $info['PlayInfoList']['PlayInfo'][1]['Format'];
-                    Resources::updateAll($data, 'id=:id', array(':id' => $id));
+                if ("Normal" == $info['VideoBase']['Status']) {
+                    foreach ($info['PlayInfoList']['PlayInfo'] as $rec) {
+                        if ($rec['Format'] == 'mp4') {
+                            $data['duration'] = $rec['Duration'];
+                            $data['url'] = $rec['PlayURL'];
+                            $data['size'] = $rec['Size'];
+                            $data['thumb'] = $info['VideoBase']['CoverURL'];
+                            $data['convert_status'] = Resources::CONVERT_STATUS_FISHING;
+                            $data['suffix'] = $rec['Format'];
+                            Resources::updateAll($data, 'id=:id', array(':id' => $id));
+                        }
+                    }
+
                     $model = $this->findModel($id);
                 }
             } catch (\Exception $e) {
@@ -142,7 +147,7 @@ class ResourcesController extends Controller
     {
         $model = $this->findModel($id);
         //上传
-        if(isset($_POST['third_resource_id'])){
+        if (isset($_POST['third_resource_id'])) {
             if ($model->third_resource_id != isset($_POST['third_resource_id'])) {
                 $model->convert_status = Resources::CONVERT_STATUS_CONVERTING;
             }

@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'desc')->textarea(['maxlength' => true]) ?>
-        <?= $form->field($model, 'files')->fileInput([]) ?>
+        <?= $form->field($model, 'files')->fileInput(['accept' => ".mp4"]) ?>
         <?= $form->field($model, 'factory_ids')->checkboxList(\app\tools\CommonFunc::getFactoryListMap()) ?>
         <div style="display: none;">
             <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
@@ -36,16 +36,15 @@ use yii\widgets\ActiveForm;
                 <input type="hidden" id="uploadAuth" name="uploadAuth">
                 <input type="button" id="uploadBtn"
                        class="btn btn-primary" onclick="start();"
-                       name="button" value="上传文件">
-                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'id' => 'submit']) ?>
+                       name="button" value="<?= Yii::t('app', 'Create') ?>"/>
 
                 <?php
             } else {
                 ?>
+                <input type="hidden" id="uploadAuth" name="uploadAuth">
                 <input type="button" id="uploadBtn"
                        class="btn btn-primary" onclick="start();"
-                       name="button" value="上传文件">
-                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                       name="button" value="<?= Yii::t('app', 'Update') ?>"/>
                 <?php
             }
             ?>

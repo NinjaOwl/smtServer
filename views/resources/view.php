@@ -44,39 +44,45 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
             <?php
             if (empty($model->third_resource_id) == false) {
-                ?>
-                <?= DetailView::widget([
-                    'model' => $model,
-                    'attributes' => [
-                        [
-                            'attribute' => 'thumb',
-                            'avatar:image',
-                            'format' => ['image', ['width' => '100', 'height' => '100', 'title' => $model->name]],
-                            'value' => $model->thumb
+                if (empty($model->url) == false) {
+                    ?>
+                    <?= DetailView::widget([
+                        'model' => $model,
+                        'attributes' => [
+                            [
+                                'attribute' => 'thumb',
+                                'avatar:image',
+                                'format' => ['image', ['width' => '100', 'height' => '100', 'title' => $model->name]],
+                                'value' => $model->thumb
+                            ],
+                            [
+                                'attribute' => 'size',
+                                'format' => 'raw',
+                                'value' => \app\tools\OutFormat::formatSize($model->size),
+                            ],
+                            [
+                                'attribute' => 'duration',
+                                'format' => 'raw',
+                                'value' => \app\tools\OutFormat::formatTimeLong($model->duration),
+                            ],
+                            [
+                                'attribute' => 'url',
+                                'format' => ['url', ['target' => '_blank']],
+                                'value' => $model->url,
+                            ],
+                            [
+                                'attribute' => 'created_at',
+                                'format' => 'raw',
+                                'value' => \app\tools\OutFormat::formatDate($model->created_at),
+                            ],
                         ],
-                        [
-                            'attribute' => 'size',
-                            'format' => 'raw',
-                            'value' => \app\tools\OutFormat::formatSize($model->size),
-                        ],
-                        [
-                            'attribute' => 'duration',
-                            'format' => 'raw',
-                            'value' => \app\tools\OutFormat::formatTimeLong($model->duration),
-                        ],
-                        [
-                            'attribute' => 'url',
-                            'format' => ['url', ['target' => '_blank']],
-                            'value' => $model->url,
-                        ],
-                        [
-                            'attribute' => 'created_at',
-                            'format' => 'raw',
-                            'value' => \app\tools\OutFormat::formatDate($model->created_at),
-                        ],
-                    ],
-                ]) ?>
-                <?php
+                    ]) ?>
+                    <?php
+                } else {
+                    ?>
+                    转码中
+                    <?php
+                }
             } else {
                 ?>
                 尚未上传视频
