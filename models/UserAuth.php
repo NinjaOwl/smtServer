@@ -37,7 +37,7 @@ class UserAuth extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'email', 'created_at', 'updated_at','name'], 'required'],
+            [['username', 'auth_key', 'password_hash', 'created_at', 'updated_at','name'], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'auth_key','name'], 'string', 'max' => 32],
             [['sex', 'status', 'created_at', 'updated_at', 'factory_id'], 'integer'],
