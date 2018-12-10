@@ -3,7 +3,6 @@
 namespace app\models;
 
 use app\models\AdminAuth;
-use app\models\User;
 use Yii;
 use yii\base\Model;
 
@@ -54,15 +53,18 @@ class ModifyForm extends Model
             if (!$user || !$user->validatePassword($this->password)) {
                 // 验证失败，调用addError方法给用户提醒信息
                 $this->addError($attribute, '旧密码错误.');
+            }else{
+                return true;
             }
         }
+
     }
 
     public function save()
     {
         if ($this->validate()) {
             $user = $this->getUser();
-            $user->password_hash = Yii::$app->security->generatePasswordHash($this->newPassword);
+            $user->setPassword($this->newPassword);
             if ($user->save()) {
                 return true;
             }
@@ -79,7 +81,7 @@ class ModifyForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            return User::findIdentity(Yii::$app->user->getId());
+            return UserAuth::findIdentity(Yii::$app->user->getId());
         } else {
             return $this->_user;
         }
