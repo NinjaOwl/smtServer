@@ -65,7 +65,7 @@ class FactorySearch extends Factory
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'addr', $this->addr])
             ->andFilterWhere(['like', 'tel', $this->tel])
-            ->andFilterWhere(['like', 'person', $this->person]);
+            ->andFilterWhere(['like', 'person', $this->person])->orderBy("order_no asc, id asc");
 
         return $dataProvider;
     }

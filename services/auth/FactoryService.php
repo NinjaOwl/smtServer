@@ -18,7 +18,7 @@ class FactoryService
     public function getList()
     {
 
-        $array = Factory::find()->asArray()->all();
+        $array = Factory::find()->asArray()->orderBy("order_no asc, id asc")->all();
         return OutTools::success(array('list'=>FormatFactoryList::format($array)));
     }
 }

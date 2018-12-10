@@ -12,6 +12,7 @@ use Yii;
  * @property string $addr
  * @property string $tel
  * @property string $person
+ * @property string $order_no
  */
 class Factory extends \yii\db\ActiveRecord
 {
@@ -32,6 +33,7 @@ class Factory extends \yii\db\ActiveRecord
             [['name', 'person'], 'string', 'max' => 50],
             [['addr'], 'string', 'max' => 255],
             [['tel'], 'string', 'max' => 20],
+            [['order_no'], 'integer'],
         ];
     }
 
@@ -46,6 +48,7 @@ class Factory extends \yii\db\ActiveRecord
             'addr' => Yii::t('app', '通信地址'),
             'tel' => Yii::t('app', '联系电话'),
             'person' => Yii::t('app', '责任人'),
+            'order_no' => Yii::t('app', '排序号'),
         ];
     }
 }
