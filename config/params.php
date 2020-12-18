@@ -7,8 +7,8 @@ return [
     'store_path' => '/opt/wx/prod/',
     'url_path' => '/upload/image/',
     'vod'=>[
-        'access_key_id'=>'LTAIT6i1ygTpXaxx',
-        'access_key_secret'=>'6CkBqsEAc58Vf5tCEcpm6HY3YMNSET',
+        'access_key_id'=>'',
+        'access_key_secret'=>'',
         'region_id'=>'cn-shanghai',
     ]
 ];
